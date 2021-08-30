@@ -234,6 +234,7 @@ C++利用 **构造函数** 和 **析构函数** 解决 **初始化和清理** �
 2. 不可以有参数，不可以 **重载**
 3. 程序在对象销毁前会自动调用析构，只调用一次
 
+**示例：**
 ```cpp
 #include <iostream>
 using namespace std;
@@ -282,6 +283,7 @@ int main()
 1. 调用默认构造函数，不要加括号()，加括号()编译器会认为是函数的声明，`Person p1();`会认为是 `返回值类型 函数名();`
 2. 不要利用拷贝构造函数 初始化 **匿名对象**，编译器会认为是对象声明 `Person(p3)` 认为是 `Person p3;`
 
+**示例：**
 ```cpp
 #include <iostream>
 using namespace std;
@@ -343,6 +345,225 @@ int main()
     return 0;
 }
 ```
+## 拷贝构造函数
+拷贝构造函数调用时机：
+- 使用一个创建完毕的对象初始化一个新对象
+- 值传递的方式给函数参数传值
+- 以值方式返回局部对象
+```cpp
+#include <iostream>
+using namespace std;
+
+class Person
+{
+private:
+    int age;
+public:
+    Person();
+    Person(int a);
+    Person(const Person& a);
+    ~Person();
+};
+
+Person::Person()
+{
+    cout << "calling a default constructor function" << endl;
+}
+
+Person::Person(int a)
+{
+    cout << "calling a constructor function" << endl;
+    age = a;
+}
+
+Person::Person(const Person& a)
+{
+    cout << "calling a copy constructor function" << endl;
+    age = a.age;
+}
+
+Person::~Person()
+{
+    cout << "calling a destructor function" << endl;
+}
 
 
+void test01(Person p)
+{
+}
+Person dowork01()
+{
+    Person p;
+    return p;
+}
+void test03()
+{
+    Person p = dowork01();
+}
 
+
+int main()
+{
+    // 初始化新对象
+    Person p1(20);
+    Person p2(p1);
+    cout << endl;
+
+    // 值传递
+    test01(p1);
+    cout << endl;
+
+    // 值方式返回
+    // 返回值优化
+    test03();// 编译器优化使得观察不到调用拷贝构造函数
+
+    return 0;
+}
+```
+
+## 构造函数调用规则
+默认情况下，C++编译器给一个类添加三个函数：
+1. 默认构造函数(无参，空实现)
+2. 默认析构函数(无参，空实现)
+3. 默认拷贝构造函数，对属性进行 **值拷贝**
+
+构造函数调用规则如下：
+- 如果定义有参构造函数，不再提供默认构造函数，但是会提供默认拷贝构造函数
+- 如果定义拷贝构造函数，不再提供其他构造函数
+
+## 深拷贝和浅拷贝
+- 浅拷贝：简单的赋值拷贝操作
+    - 属性有在堆区开辟的，堆区内存重复释放，非法操作内存
+- 堆区重新申请空间，进行拷贝操作
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Person
+{
+public:
+    int age;
+    int * height;
+    Person();
+    Person(int a, int h);
+    Person(const Person& a);
+    ~Person();
+};
+
+Person::Person()
+{
+    cout << "calling a default constructor function" << endl;
+}
+
+Person::Person(int a, int h)
+{
+    cout << "calling a constructor function" << endl;
+    age = a;
+    height = new int(h);
+    // *height = h;
+}
+
+Person::Person(const Person& a)
+{
+    cout << "calling a deep copy constructor function" << endl;
+    age = a.age;
+    // height = a.height;// 编译器默认实现的效果
+    height = new int(*a.height);
+}
+
+Person::~Person()
+{
+    // 将堆区开辟的数据做释放
+    if (height != NULL)
+    {
+        delete height;
+        height = NULL;// 防止野指针
+    }
+    cout << "calling a destructor function" << endl;
+}
+
+
+void test01()
+{
+    Person p1(18, 160);
+    cout << "p1年龄： " << p1.age << "身高为： " << p1.height << endl;
+    Person p2(p1);// 使用编译器默认拷贝构造函数
+    cout << "p2年龄： " << p2.age << "身高为： " << p2.height << endl;
+    // 浅拷贝：堆区内存重复释放，非法操作内存
+}
+
+int main()
+{
+    test01();
+    return 0;
+}
+```
+## 初始化列表
+**作用：** 初始化属性
+**语法：**
+- `ClassName(): Property1(Value1)...{}`
+- `ClassName(Type Property1, ...): Property1(Value1)...{}`
+
+## 类对象作为类成员
+C++类中的成员可以是另一个类的对象，称为 **对象成员**
+- 构造时，先构造 **对象成员** 再构造 **自身**
+- 析构时，先释放 **自身** 再释放 **对象成员**
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Phone
+{
+public:
+    string pName;
+    Phone(string n);
+    ~Phone();
+};
+
+Phone::Phone(string n): pName(n)
+{
+    cout << "Calling constructor of Phone class" << endl;
+}
+
+Phone::~Phone()
+{
+    cout << "Calling destructor of Phone class" << endl;
+}
+
+
+class Person
+{
+public:
+    string name;
+    Phone phone;
+    Person(string n, string pn);
+    ~Person();
+};
+
+// 相当于Phone phone = pn 隐式转换法
+Person::Person(string n, string pn): name(n),phone(pn)
+{
+    cout << "Calling constructor of Person class" << endl;
+}
+
+Person::~Person()
+{
+    cout << "Calling destructor of Person class" << endl;
+}
+
+
+void test01()
+{
+    Person p("Legolas", "Nokia");
+    cout << p.name << "拿着" << p.phone.pName << endl;
+}
+
+int main()
+{
+    test01();
+    return 0;
+}
+```
