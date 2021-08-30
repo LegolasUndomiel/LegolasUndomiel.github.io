@@ -241,8 +241,6 @@ using namespace std;
 
 class Person
 {
-private:
-    /* data */
 public:
     Person();
     ~Person();
@@ -262,7 +260,6 @@ Person::~Person()// destructor
 int main()
 {
     Person p;
-    system("pause");
     return 0;
 }
 ```
@@ -461,7 +458,6 @@ Person::Person(int a, int h)
     cout << "calling a constructor function" << endl;
     age = a;
     height = new int(h);
-    // *height = h;
 }
 
 Person::Person(const Person& a)
