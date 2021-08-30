@@ -234,6 +234,37 @@ C++利用 **构造函数** 和 **析构函数** 解决 **初始化和清理** �
 2. 不可以有参数，不可以 **重载**
 3. 程序在对象销毁前会自动调用析构，只调用一次
 
+```cpp
+#include <iostream>
+using namespace std;
+
+class Person
+{
+private:
+    /* data */
+public:
+    Person();
+    ~Person();
+};
+
+Person::Person()// constructor
+{
+    cout << "calling a constructor function" << endl;
+}
+
+Person::~Person()// destructor
+{
+    cout << "calling a destructor function" << endl;
+}
+
+
+int main()
+{
+    Person p;
+    system("pause");
+    return 0;
+}
+```
 ## 构造函数的分类及调用
 - 按 **参数** 分：
     1. 有参构造
@@ -250,6 +281,68 @@ C++利用 **构造函数** 和 **析构函数** 解决 **初始化和清理** �
 **注意事项：**
 1. 调用默认构造函数，不要加括号()，加括号()编译器会认为是函数的声明，`Person p1();`会认为是 `返回值类型 函数名();`
 2. 不要利用拷贝构造函数 初始化 **匿名对象**，编译器会认为是对象声明 `Person(p3)` 认为是 `Person p3;`
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Person
+{
+private:
+    int age;
+public:
+    Person();
+    Person(int a);
+    Person(const Person &p);// const限定修改，引用传递
+    ~Person();
+};
+
+Person::Person()// constructor
+{// 无参构造(默认构造)
+    cout << "calling a constructor function with no parameters" << endl;
+}
+
+Person::Person(int a)// constructor
+{// 有参构造
+    age = a;
+    cout << "calling a constructor function" << endl;
+}
+
+Person::Person(const Person &p)// 拷贝构造
+{
+    // 拷贝传入对象的属性
+    age = p.age;
+    cout << "calling a copy constructor function" << endl;
+}
+
+Person::~Person()// destructor
+{
+    cout << "calling a destructor function" << endl;
+}
+
+
+int main()
+{
+    // 括号法
+    Person p1;// 默认构造函数调用
+    Person p2(10);// 有参构造函数调用
+    Person p3(p2);// 拷贝构造函数
+
+    // 显示法
+    Person p4;
+    Person p5 = Person(10);// Person(10)单独拿出来是匿名对象
+    Person p6 = Person(p5);// 当前行结束后，系统会立即回收
+    cout << "test" << endl;
+    Person(10);
+    cout << "test" << endl;
+
+    // 隐式转换法
+    Person p7 = 10;// Person p7 = Person(10);
+    Person p8 = p7;
+    system("pause");
+    return 0;
+}
+```
 
 
 
