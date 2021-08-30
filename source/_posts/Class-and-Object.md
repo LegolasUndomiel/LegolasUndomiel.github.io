@@ -567,3 +567,92 @@ int main()
     return 0;
 }
 ```
+## 静态成员
+用关键字 `static` 修饰成员变量和成员函数，静态成员分为：
+- 静态成员变量
+    - 所有对象共享同一份数据
+    - 在 **编译阶段** 分配内存，全局区
+    - 类内声明，类外初始化
+    - 访问：
+        - 受 **访问权限** 限制
+        - 通过 **对象** 访问
+        - 通过 **类名** 访问
+- 静态成员函数
+    - 所有对象共享同一个函数
+    - 静态成员函数 **只能** 访问 **静态成员变量**，对于非静态成员变量，无法区分操作哪个对象的变量
+    - 受 **访问权限** 限制
+
+```cpp
+#include <iostream>
+using namespace std;
+class Person
+{
+private:
+    static int b;
+    int c;
+public:
+    static int a;
+    Person();
+    ~Person();
+    static void func();
+};
+
+Person::Person()
+{
+}
+
+Person::~Person()
+{
+}
+
+void Person::func()
+{
+    a++;
+    b++;
+    // 不知道操作哪个对象的属性
+    // c = 200;// INVALID
+    cout << "Calling a static member function" << endl;
+}
+
+int Person::a = 100;// 初始化
+int Person::b = 100;// 初始化
+
+void test01()
+{
+    Person p1;
+    cout << p1.a << endl;
+
+    Person p2;
+    p2.a = 200;
+    cout << p2.a << endl;
+}
+void test02()
+{
+    Person p;
+    // 通过对象访问
+    cout << p.a << endl;
+
+    // 通过类名访问
+    cout << Person::a << endl;
+
+    // 静态成员变量有访问权限
+    // cout << Person::b << endl;// INVALID
+}
+void test03()
+{
+    // 通过对象访问
+    Person p;
+    p.func();
+
+    // 通过类名访问
+    Person::func();
+}
+
+int main()
+{
+    // test01();
+    // test02();
+    test03();
+    return 0;
+}
+```
