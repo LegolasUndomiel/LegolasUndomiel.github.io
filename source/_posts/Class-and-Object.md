@@ -1118,6 +1118,7 @@ int main(int argc, char const *argv[])
 - `bool operator<(cnost ClassName & Object)`
 - `bool operator>(cnost ClassName & Object)`
 - `bool operator!=(cnost ClassName & Object)`
+
 ## 函数调用运算符重载
 - 函数调用运算符 `()`
 - 由于重载后使用方式非常像函数的调用，称之为 **仿函数**，*在 `STL` 中应用较多*，非常灵活
