@@ -652,3 +652,468 @@ int main()
     return 0;
 }
 ```
+# C++对象模型和this指针
+## 成员变量和成员函数分开存储
+- 只有 **非静态成员变量** 才属于类的对象
+- 静态成员、非静态成员函数 不属于某一个对象，只有一份，分开存储
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Person
+{
+private:
+    int a;// 非静态成员变量 属于类的对象上
+    static int b;// 静态成员变量 不属于类对象上
+public:
+    Person();
+    ~Person();
+    void func(){}// 非静态成员函数 不属于类对象上
+    static void foo(){}// 静态成员函数 不属于类对象上
+};
+
+Person::Person()
+{
+}
+
+Person::~Person()
+{
+}
+
+int Person::b = 5;
+
+void test01()
+{
+    Person p;
+    // 空对象占用内存空间为：1
+    // C++编译器给每个空对象分配一个字节空间，区分空对象占内存的位置
+    // 每个空对象也应该有独一无二的内存地址
+    cout << "sizeof(p)" << sizeof(p) << endl;
+}
+
+int main()
+{
+    test01();
+    return 0;
+}
+```
+## this指针
+每个非静态成员函数只有一份函数实例，多个类型的对象会共用一块代码
+- **问题是：** *代码如何区分是哪个对象在调用自己？*
+- this指针指向 **被调用的成员函数所属的对象**
+- this指针隐含在每一个非静态成员函数内，不需要定义，直接使用
+- this指针的 **本质** 是一个指针常量，指针的指向不可以修改 `ClassName * const this`
+- 在成员函数中使用属性相对于 `this->Property`
+
+**this指针的用途：**
+- 形参和成员变量同名时，可以用this指针区分
+- 返回对象本身可以使用 `return *this`
+
+```cpp
+#include <iostream>
+using namespace std;
+class Person
+{
+public:
+    int age;
+    Person(int age);
+    Person(const Person &p)
+    {
+        age = p.age;
+        cout << "Calling a copy constructor" << endl;
+    }
+    ~Person();
+    void PersonAddAge(Person & p)
+    {
+        this->age += p.age;
+    }
+    Person & PersonAdd(Person & p)// 返回值 和 返回引用 的区别
+    // Person PersonAdd(Person & p)// 返回值 发生复制 类似与 值传入
+    {
+        this->age += p.age;
+        return *this;
+    }
+};
+
+Person::Person(int age)
+{
+    // age = age;
+    this->age = age;// this指向p1
+}
+
+Person::~Person()
+{
+}
+
+
+void test01()
+{
+    Person p1(18);
+    cout << p1.age << endl;
+}
+void test02()
+{
+    Person p1(10);
+    Person p2(10);
+    p2.PersonAddAge(p1);
+    cout << "Age = " << p2.age << endl;
+
+    // 链式编程思想 e.g. cout
+    Person p3 = p2.PersonAdd(p1).PersonAdd(p1);
+    cout << "Age = " << p2.age << endl;
+    cout << "Age = " << p3.age << endl;
+}
+
+
+int main(int argc, char const *argv[])
+{
+    // test01();
+    test02();
+    return 0;
+}
+```
+## 空指针访问成员函数
+C++中允许空指针调用成员函数，要注意有没有用到this指针
+```cpp
+#include <iostream>
+using namespace std;
+
+class Person
+{
+public:
+    int age;
+    Person();
+    ~Person();
+    void showClassName()
+    {
+        cout << "this is Person class" << endl;
+    }
+    void showPersonAge()
+    {
+        // 预防破坏
+        if (this == NULL)
+        {
+            return;
+        }
+
+        // 传入的指针为NULL
+        cout << "age = " << age << endl;// this->age
+    }
+};
+
+Person::Person()
+{
+}
+
+Person::~Person()
+{
+}
+
+void test01()
+{
+    Person * p = NULL;
+    p->showClassName();
+    p->showPersonAge();
+}
+
+int main(int argc, char const *argv[])
+{
+    test01();
+    return 0;
+}
+```
+## const修饰成员函数
+**常函数：**
+- 常函数不可以修改成员属性
+- 成员属性声明加关键字 `mutable` 后，在常函数中仍可修改
+- `返回值类型 成员函数名() const`
+- 此时this指针修改为 `const ClassName * const this` 因此不能修改成员属性
+
+**常对象：**
+- 常对象只能调用常函数
+- 构造语法： `const ClassName ObjectName`
+
+# 友元
+使用 **友元** 技术，可以让类外特殊的 **函数或类** 访问 **私有属性**
+关键字 `friend`
+## 全局函数做友元
+**语法：** 在类中用 `friend 返回值类型 函数名();` 声明
+## 类做友元
+**语法：** 在类中用 `friend class 类名;` 声明该类是本类的友元，可以访问私有属性
+## 成员函数做友元
+限定类中特殊成员函数可以访问，局部授权
+**语法：** 在类中用 `friend 返回值类型 类名::函数名();` 声明
+# 运算符重载
+对已有运算符重新定义，赋予其另一种功能，以适应不同的数据类型
+- 对于内置数据类型，编译器知道如何运算
+- 对于自定义数据类型，使用运算符重载
+- 通过成员函数、全局函数重载运算符
+- 运算符重载也可以发生 **函数重载**
+
+## 加号运算符重载
+- **作用：** 实现两个自定义数据类型相加运算
+- **全局函数重载：** `ClassName operator+(const ClassName & Object1, const ClassName & Object2)`
+- **成员函数重载：** `ClassName operator+(const ClassName & Object)`
+## 左移运算符重载
+- **作用：** 实现输出自定义数据类型
+- 只能用全局函数重载
+- **语法：** `ostream & operator<<(ostream & output, const ClassName & Object)`
+```cpp
+#include <iostream>
+using namespace std;
+
+class Person
+{
+public:
+    int a;
+    int b;
+    Person();
+    Person(const Person & p);
+    ~Person();
+    // Person & operator+(const Person & p);// 成员函数重载运算符+，需要自己管理内存
+    Person operator+(const Person & p);// 成员函数重载运算符+
+    // void operator<<(cout)// 实质：p.operator<<(cout) 简化：p << cout
+    // 不能用成员函数重载<<运算符，只能用全局函数重载<<运算符
+    friend ostream & operator<<(ostream & out, const Person & p);// 友元全局函数
+};
+
+Person::Person()
+{
+}
+
+Person::Person(const Person & p)
+{
+    this->a = p.a;
+    this->b = p.b;
+    cout << "Calling a copy constructor" << endl;
+}
+
+Person::~Person()
+{
+}
+
+// Person & Person::operator+(const Person & p)
+// {
+    // Person * temp = new Person;
+    // temp->a = this->a + p.a;
+    // temp->b = this->b + p.b;
+    // cout << "Calling a member function" << endl;
+    // return *temp;
+// }
+Person Person::operator+(const Person & p)
+{
+    Person temp;
+    temp.a = this->a + p.a;
+    temp.b = this->b + p.b;
+    cout << "Calling a member function" << endl;
+    return temp;
+}
+
+Person operator+(const Person & a, const Person & b)// 全局函数重载
+{
+    Person temp;
+    temp.a = a.a + b.a;
+    temp.b = a.b + b.b;
+    cout << "Calling a function" << endl;
+    return temp;
+}
+
+Person operator+(const Person & a, const int & b)// 运算符重载-函数重载
+{
+    Person temp;
+    temp.a = a.a + b;
+    temp.b = a.b + b;
+    return temp;
+}
+
+ostream & operator<<(ostream & out, const Person & p)// 输出自定义类型
+{
+    out << "a = " << p.a << "\tb = " << p.b;
+    return out;
+    // 实质：operator<<(cout, p);
+    // 简化：cout << p;
+}
+
+void test01()
+{
+    Person p1;
+    p1.a = 10;
+    p1.b = 10;
+    Person p2;
+    p2.a = 10;
+    p2.b = 10;
+    Person p3 = p1 + p2;
+    Person p4 = p3 + 10;// 函数重载
+    // Person p3 = p1.operator+(p2);// 成员函数重载本质
+    // Person p3 = operator+(p1, p2);// 全局函数重载本质
+    cout << p3.a << p3.b << endl;
+    cout << p4.a << p4.b << endl;
+
+    cout << p1 << endl;// 使用链式编程思想
+}
+void test02()
+{
+    Person p1;
+    p1.a = 10;
+    p1.b = 10;
+    Person p2;
+    p2.a = 10;
+    p2.b = 10;
+    cout << p1 + p2 << endl;
+    Person p3 = p1 + p2;
+    cout << p3 << endl;
+}
+
+int main()
+{
+    test01();
+    // test02();
+    return 0;
+}
+```
+## 自增运算符重载
+```cpp
+#include <iostream>
+using namespace std;
+// 重载自增运算符++
+
+class MyInteger
+{
+private:
+    int num;
+public:
+    MyInteger();
+    ~MyInteger();
+    friend ostream & operator<<(ostream & output, MyInteger m);
+    // 重载前置自增运算符++
+    MyInteger & operator++()// 返回引用对一个对象进行自增操作
+    {
+        num++;
+        return *this;
+    }
+    // 重载后置自增运算符++
+    MyInteger operator++(int)// int占位，使得可以重载，可以用于区分前置和后者
+    {
+        // 先记录结果
+        MyInteger temp;
+        // 自增
+        num++;
+        // 记录结果返回
+        return temp;
+    }
+};
+
+MyInteger::MyInteger()
+{
+    num = 0;
+}
+
+MyInteger::~MyInteger()
+{
+}
+
+ostream & operator<<(ostream & output,const MyInteger m)
+{
+    output << m.num;
+    return output;
+}
+
+void test01()
+{
+    MyInteger myint;
+    cout << ++(++myint) << endl;
+    cout << myint << endl;
+}
+void test02()
+{
+    MyInteger myint;
+    cout << myint++ << endl;
+    cout << myint << endl;
+}
+
+int main(int argc, char const *argv[])
+{
+    // test01();
+    test02();
+    return 0;
+}
+```
+## 赋值运算符重载
+- 编译器提供赋值运算符 `operator=` 对属性进行值拷贝
+- 如果类中有属性指向 **堆区**，赋值操作会出现浅拷贝的问题
+```cpp
+#include <iostream>
+using namespace std;
+
+class Person
+{
+public:
+    int * age;
+    Person(int Age);
+    ~Person();
+    Person & operator=(const Person & p);
+};
+
+Person::Person(int Age)
+{
+    age = new int(Age);
+}
+
+Person::~Person()
+{
+    if (age != NULL)
+    {
+        delete age;
+        age = NULL;
+    }
+}
+// 重载 赋值运算符
+Person & Person::operator=(const Person & p)
+{
+    // 编译器提供 浅拷贝
+    // age = p.age;
+
+    // 应该先判断是否有属性在堆区，如果有先释放干净，再深拷贝
+    if (age != NULL)
+    {
+        delete age;
+        age = NULL;
+    }
+    // 深拷贝
+    age = new int(*p.age);
+    // 返回自身，链式编程
+    return *this;
+}
+
+void test01()
+{
+    Person p1(18);
+    Person p2(19);
+    Person p3(30);
+    p2 = p1;// 未重载赋值运算符，使用编译器默认值拷贝，析构时重复释放(浅拷贝)
+    p3 = p2 = p1;
+    cout << *p1.age << endl;
+    cout << *p2.age << endl;
+    cout << *p3.age << endl;
+}
+
+
+int main(int argc, char const *argv[])
+{
+    test01();
+    return 0;
+}
+```
+
+## 关系运算符重载
+- 判断自定义类型的关系(==,<,>,!=)
+- `bool operator==(cnost ClassName & Object)`
+- `bool operator<(cnost ClassName & Object)`
+- `bool operator>(cnost ClassName & Object)`
+- `bool operator!=(cnost ClassName & Object)`
+## 函数调用运算符重载
+- 函数调用运算符 `()`
+- 由于重载后使用方式非常像函数的调用，称之为 **仿函数**，*在 `STL` 中应用较多*，非常灵活
+- `void operator()(形参){}`
+**匿名函数对象：** `类名()`
