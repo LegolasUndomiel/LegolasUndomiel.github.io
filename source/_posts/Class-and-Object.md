@@ -855,10 +855,12 @@ int main(int argc, char const *argv[])
 - **作用：** 实现两个自定义数据类型相加运算
 - **全局函数重载：** `ClassName operator+(const ClassName & Object1, const ClassName & Object2)`
 - **成员函数重载：** `ClassName operator+(const ClassName & Object)`
+
 ## 左移运算符重载
 - **作用：** 实现输出自定义数据类型
 - 只能用全局函数重载
 - **语法：** `ostream & operator<<(ostream & output, const ClassName & Object)`
+
 ```cpp
 #include <iostream>
 using namespace std;
@@ -1042,6 +1044,7 @@ int main(int argc, char const *argv[])
 ## 赋值运算符重载
 - 编译器提供赋值运算符 `operator=` 对属性进行值拷贝
 - 如果类中有属性指向 **堆区**，赋值操作会出现浅拷贝的问题
+
 ```cpp
 #include <iostream>
 using namespace std;
@@ -1116,4 +1119,5 @@ int main(int argc, char const *argv[])
 - 函数调用运算符 `()`
 - 由于重载后使用方式非常像函数的调用，称之为 **仿函数**，*在 `STL` 中应用较多*，非常灵活
 - `void operator()(形参){}`
+
 **匿名函数对象：** `类名()`
