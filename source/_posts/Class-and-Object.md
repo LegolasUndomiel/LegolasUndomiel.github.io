@@ -1126,3 +1126,385 @@ int main(int argc, char const *argv[])
 - `void operator()(形参){}`
 
 **匿名函数对象：** `类名()`
+# 继承
+- 下级别的成员拥有上级别的共性，还有自己的特性
+- 利用 **继承** 的技术，减小代码重复
+- `class A : 继承方式 class B`
+    - A类称为 **子类** 或 **派生类**
+    - B类称为 **父类** 或 **基类**
+    - **继承方式：** public   protected   private
+
+```cpp
+#include <iostream>
+using namespace std;
+
+// 不使用 继承 技术
+// Java 页面
+class Java
+{
+public:
+    Java();
+    ~Java();
+    void header()
+    {
+        cout << "首页、公开课、登录、注册...(公共分类列表)" << endl;
+    }
+    void footer()
+    {
+        cout << "帮助中心、交流合作...(公共底部)" << endl;
+    }
+    void left()
+    {
+        cout << "Java,Python,C++,...(公共分类列表)" << endl;
+    }
+    void content()
+    {
+        cout << "Java学科视频" << endl;
+    }
+};
+
+Java::Java()
+{
+}
+
+Java::~Java()
+{
+}
+
+// Python页面
+class Python
+{
+public:
+    Python();
+    ~Python();
+    void header()
+    {
+        cout << "首页、公开课、登录、注册...(公共分类列表)" << endl;
+    }
+    void footer()
+    {
+        cout << "帮助中心、交流合作...(公共底部)" << endl;
+    }
+    void left()
+    {
+        cout << "Java,Python,C++,...(公共分类列表)" << endl;
+    }
+    void content()
+    {
+        cout << "Python学科视频" << endl;
+    }
+};
+
+Python::Python()
+{
+}
+
+Python::~Python()
+{
+}
+
+// 使用 继承 技术
+class BasePage
+{
+public:
+    BasePage();
+    ~BasePage();
+    void header()
+    {
+        cout << "首页、公开课、登录、注册...(公共分类列表)" << endl;
+    }
+    void footer()
+    {
+        cout << "帮助中心、交流合作...(公共底部)" << endl;
+    }
+    void left()
+    {
+        cout << "Java,Python,C++,...(公共分类列表)" << endl;
+    }
+};
+
+BasePage::BasePage()
+{
+}
+
+BasePage::~BasePage()
+{
+}
+
+// C++页面
+class Cpp : public BasePage
+{
+public:
+    Cpp();
+    ~Cpp();
+    void content()
+    {
+        cout << "C++学科视频" << endl;
+    }
+};
+
+Cpp::Cpp()
+{
+}
+
+Cpp::~Cpp()
+{
+}
+
+
+void test01()
+{
+    Java Ja;
+    Ja.header();
+    Ja.footer();
+    Ja.left();
+    Ja.content();
+}
+void test02()
+{
+    Python Py;
+    Py.header();
+    Py.footer();
+    Py.left();
+    Py.content();
+}
+void test03()
+{
+    Cpp cpp;
+    cpp.header();
+    cpp.footer();
+    cpp.left();
+    cpp.content();
+}
+
+
+int main()
+{
+    test01();
+    test02();
+    test03();
+    return 0;
+}
+```
+## 继承方式
+**继承规则：**
+- 父类中 **私有属性** 三种继承方式 **都不可访问**
+- 公共继承  public，父类中 **公共属性** 和 **保护属性** **访问权限不变**
+- 保护继承  protected，父类中 **公共属性** 和 **保护属性** 变为 **保护类型**
+- 私有继承  private，父类中 **公共属性** 和 **保护属性** 变为 **私有属性**
+
+## 继承中的对象模型
+- 父类中 **非静态成员属性** 都会被继承
+- 私有成员属性是被编译器 **隐藏**，访问不到，但确实继承了
+
+**查看类的布局：**
+- GCC 7.x及更早版本：`g++ -fdump-class-hierarchy fileName`
+- GCC 8.x： `g++ -fdump-lang-class fileName`
+- Visual Studio: 开发人员命令提示符 `cl /d1 reportSingleClassLayout类名 文件名`
+
+## 继承中的构造和析构顺序
+创建子类对象，也会调用父类的构造函数
+**构造顺序：**
+- 构造父类对象
+- 构造子类对象
+
+**析构顺序：**
+- 析构子类对象
+- 析构父类对象
+
+## 继承同名成员处理方式
+子类和父类出现同名的成员，如何访问数据？
+- 访问 **子类** 同名成员    **直接访问**即可
+    - **语法：** `Object.Property`
+    - **语法：** `Object.MemberFunction`
+- 访问 **父类** 同名成员    **需要加作用域**
+    - **语法：** `Object.BaseClass::Property`
+    - **语法：** `Object.BaseClass::MemberFunction`
+
+**注：** 如果子类中出现和父类同名的成员函数，父类中所有同名成员函数隐藏，想访问父类中隐藏的同名成员函数，需要加作用域
+
+## 继承同名静态成员处理方式
+静态成员和非静态成员出现同名，处理方式一致。
+- 通过类名访问：
+    - `Subclass::BaseClass::MemberFunction`
+
+## 多继承语法
+C++允许 **一个类继承多个类**
+语法： `class 子类 : 继承方式 父类 , ...`
+实际开发中不建议用
+```cpp
+#include <iostream>
+using namespace std;
+
+class Base
+{
+public:
+    int a;
+    Base();
+    ~Base();
+protected:
+    int b;
+private:
+    int c;
+};
+
+Base::Base()
+{
+    a = 100;
+    b = 200;
+    c = 300;
+    cout << "Calling a Base constructor" << endl;
+}
+
+Base::~Base()
+{
+    cout << "Calling a Base destructor" << endl;
+}
+
+class Base2
+{
+public:
+    int a;
+    Base2();
+    ~Base2();
+};
+
+Base2::Base2()
+{
+    a = 400;
+    cout << "Calling a Base2 constructor" << endl;
+}
+
+Base2::~Base2()
+{
+    cout << "Calling a Base2 destructor" << endl;
+}
+
+
+class Son : public Base , public Base2
+{
+public:
+    int a;
+    int d;
+    Son();
+    ~Son();
+};
+
+Son::Son()
+{
+    a = 2000;
+    d = 1000;
+    cout << "Calling a Son constructor" << endl;
+}
+
+Son::~Son()
+{
+    cout << "Calling a Son destructor" << endl;
+}
+
+void test01()
+{
+    Son s;
+    cout << "sizeof(Son) = " << sizeof(s) << endl;
+    // 父类中非静态成员属性都会被继承
+    // 私有成员属性是被编译器隐藏，访问不到，但确实继承了
+    cout << "a = " << s.a << endl;
+    cout << "Base::a = " << s.Base::a << endl;
+    cout << "Base2::a = " << s.Base2::a << endl;
+}
+
+int main(int argc, char const *argv[])
+{
+    test01();
+    return 0;
+}
+```
+
+## 菱形继承
+**概念：** 两个派生类继承一个基类，又有一个类同时继承这两个派生类
+- 二义性，继承了两份基类数据，只需要一份即可
+- 利用 **虚继承** 可以解决菱形继承的问题
+- `class 类名 : virtual 继承方式 基类`
+- `vbptr` virtual base pointer
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Animal
+{
+public:
+    int age;
+    Animal();
+    ~Animal();
+};
+
+Animal::Animal()
+{
+}
+
+Animal::~Animal()
+{
+}
+
+class Sheep : virtual public Animal
+{
+public:
+    Sheep();
+    ~Sheep();
+};
+
+Sheep::Sheep()
+{
+}
+
+Sheep::~Sheep()
+{
+}
+
+class Camel : virtual public Animal
+{
+public:
+    Camel();
+    ~Camel();
+};
+
+Camel::Camel()
+{
+}
+
+Camel::~Camel()
+{
+}
+
+class Alpaca : public Sheep, public Camel
+{
+public:
+    Alpaca();
+    ~Alpaca();
+};
+
+Alpaca::Alpaca()
+{
+}
+
+Alpaca::~Alpaca()
+{
+}
+
+
+void test01()
+{
+    Alpaca a;
+    a.age = 18;
+    cout << "age = " << a.age << endl;
+    cout << "sizeof(Alpaca) = " << sizeof(Alpaca) << endl;
+}
+
+int main(int argc, char const *argv[])
+{
+    test01();
+    return 0;
+}
+```
+# 多态
