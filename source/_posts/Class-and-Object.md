@@ -347,6 +347,7 @@ int main()
 - 使用一个创建完毕的对象初始化一个新对象
 - 值传递的方式给函数参数传值
 - 以值方式返回局部对象
+
 ```cpp
 #include <iostream>
 using namespace std;
