@@ -1435,62 +1435,19 @@ class Animal
 {
 public:
     int age;
-    Animal();
-    ~Animal();
 };
-
-Animal::Animal()
-{
-}
-
-Animal::~Animal()
-{
-}
 
 class Sheep : virtual public Animal
 {
-public:
-    Sheep();
-    ~Sheep();
 };
-
-Sheep::Sheep()
-{
-}
-
-Sheep::~Sheep()
-{
-}
 
 class Camel : virtual public Animal
 {
-public:
-    Camel();
-    ~Camel();
 };
-
-Camel::Camel()
-{
-}
-
-Camel::~Camel()
-{
-}
 
 class Alpaca : public Sheep, public Camel
 {
-public:
-    Alpaca();
-    ~Alpaca();
 };
-
-Alpaca::Alpaca()
-{
-}
-
-Alpaca::~Alpaca()
-{
-}
 
 
 void test01()
@@ -1507,4 +1464,204 @@ int main(int argc, char const *argv[])
     return 0;
 }
 ```
+
 # 多态
+## 多态的基本概念
+多态分两类：
+- **静态多态：** **函数重载** 和 **运算符重载** 都属于静态多态
+- **动态多态：** 由 **派生类** 和 **虚函数** 实现运行时多态
+
+静态多态和动态多态的 **区别：**
+- 静态多态的 函数地址 是 **早绑定**，编译阶段确定函数地址
+- 动态多态的 函数地址 是 **晚绑定**，运行阶段确定函数地址
+
+动态多态的满足条件：
+- 有继承关系
+- 子类要 **重写** 父类的虚函数，返回值类型、函数名、参数列表完全相同
+
+动态多态的使用：
+- 父类的 指针或引用 指向子类对象 `e.g. Animal & animal = cat`
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Animal
+{
+public:
+    // 地址早绑定 在编译阶段确定函数地址
+    // 如果想执行猫说话,要晚绑定
+    virtual void speak();
+};
+
+void Animal::speak()
+{
+    cout << "Animal is speaking" << endl;
+}
+
+class Cat : public Animal
+{
+public:
+    void speak();
+};
+
+void Cat::speak()
+{
+    cout << "Cat is speaking" << endl;
+}
+
+
+void doSpeak(Animal & animal)
+{
+    animal.speak();
+}
+
+void test01()
+{
+    Cat cat;
+    doSpeak(cat);// Animal & animal = cat;
+}
+void test02()
+{
+    cout << "sizeof(Animal) = " << sizeof(Animal) << endl;
+}
+
+
+int main(int argc, char const *argv[])
+{
+    // test01();
+    test02();
+    return 0;
+}
+```
+## 多态的底层原理
+
+## 多态案例1：计算器类
+多态的优点：
+- 代码组织结构清晰
+- 可读性强
+- 利于前期和后期的 **扩展** 以及 **维护**
+- **C++开发提倡利用多态设计程序架构**
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+// 普通写法
+class Calculator
+{
+public:
+    int iNum1;
+    int iNum2;
+    int getResult(string oper);
+};
+// 
+int Calculator::getResult(string oper)
+{
+    if (oper == "+")
+    {
+        return iNum1 + iNum2;
+    }
+    else if (oper == "-")
+    {
+        return iNum1 - iNum2;
+    }
+    else if (oper == "*")
+    {
+        return iNum1 * iNum2;
+    }
+    // 如果想扩展新的功能，需要修改源码
+    // 在真实开发中， 提倡 开闭原则
+    // 开闭原则：对扩展进行开放，对修改进行关闭
+    else
+    {
+        return 0;
+    }
+}
+
+// 利用多态实现计算器
+// 计算器抽象类
+class AbstractCalculator
+{
+public:
+    int iNum1;
+    int iNum2;
+    virtual int getResult()
+    {
+        return 0;
+    }
+};
+
+// 加法计算器
+class AddCalculator : public AbstractCalculator
+{
+public:
+    int getResult()
+    {
+        return iNum1 + iNum2;
+    }
+};
+
+// 减法计算器
+class SubCalculator : public AbstractCalculator
+{
+public:
+    int getResult()
+    {
+        return iNum1 - iNum2;
+    }
+};
+
+// 乘法计算器
+class MulCalculator : public AbstractCalculator
+{
+public:
+    int getResult()
+    {
+        return iNum1 * iNum2;
+    }
+};
+
+void test01()
+{
+    Calculator c;
+    c.iNum1 = 10;
+    c.iNum2 = 10;
+    cout << c.iNum1 << " + " << c.iNum2 << " = " << c.getResult("+") << endl;
+    cout << c.iNum1 << " - " << c.iNum2 << " = " << c.getResult("-") << endl;
+    cout << c.iNum1 << " * " << c.iNum2 << " = " << c.getResult("*") << endl;
+}
+
+void test02()
+{
+    // 多态使用条件，父类指针或者引用指向子类对象
+    AbstractCalculator * abc = new AddCalculator;
+    abc->iNum1 = 10;
+    abc->iNum2 = 10;
+    cout << abc->iNum1 << " + " << abc->iNum2 << " = " << abc->getResult() << endl;
+    // 销毁
+    delete abc;
+
+    AddCalculator add;
+    add.iNum1 = 20;
+    add.iNum2 = 40;
+    AbstractCalculator & temp = add;
+    cout << temp.iNum1 << " + " << temp.iNum2 << " = " << temp.getResult() << endl;
+
+    // 减法运算
+    abc = new SubCalculator;
+    abc->iNum1 = 10;
+    abc->iNum2 = 10;
+    cout << abc->iNum1 << " - " << abc->iNum2 << " = " << abc->getResult() << endl;
+    // 销毁
+    delete abc;
+}
+
+int main(int argc, char const *argv[])
+{
+    // test01();
+    test02();
+    return 0;
+}
+```
