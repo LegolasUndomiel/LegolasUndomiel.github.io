@@ -1665,3 +1665,215 @@ int main(int argc, char const *argv[])
     return 0;
 }
 ```
+
+## 纯虚函数和抽象类
+- 在多态中，父类中虚函数的实现是毫无意义的，主要都是调用子类重写的内容，因此可以将 **虚函数** 改为 **纯虚函数**
+- 语法： `virtual 返回值类型 函数名() = 0;`
+- 类中有纯虚函数，称为 **抽象类**
+- 抽象类特点：
+    - 无法实例化对象
+    - 子类必须 **重写** 抽象类中的纯虚函数，否则也属于抽象类
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class AbastractDrinks
+{
+public:
+    virtual void Boil() = 0;
+    virtual void Brew() = 0;
+    virtual void PourInCup() = 0;
+    virtual void AddSth() = 0;
+    void makeDrink()
+    {
+        Boil();
+        Brew();
+        PourInCup();
+        AddSth();
+    }
+};
+
+class Coffee : public AbastractDrinks
+{
+public:
+    virtual void Boil()
+    {
+        cout << "煮农夫山泉" << endl;
+    }
+    virtual void Brew()
+    {
+        cout << "冲泡咖啡" << endl;
+    }
+    virtual void PourInCup()
+    {
+        cout << "倒入杯中" << endl;
+    }
+    virtual void AddSth()
+    {
+        cout << "加入糖和牛奶" << endl;
+    }
+};
+
+class Tea : public AbastractDrinks
+{
+public:
+    virtual void Boil()
+    {
+        cout << "煮矿泉水" << endl;
+    }
+    virtual void Brew()
+    {
+        cout << "冲泡茶叶" << endl;
+    }
+    virtual void PourInCup()
+    {
+        cout << "倒入杯中" << endl;
+    }
+    virtual void AddSth()
+    {
+        cout << "加入枸杞" << endl;
+    }
+};
+
+void doWork(AbastractDrinks * abs)
+{
+    abs->makeDrink();
+    delete abs;// 释放
+}
+
+void test01()
+{
+    // 制作咖啡
+    doWork(new Coffee);
+    doWork(new Tea);
+}
+
+int main()
+{
+    test01();
+    return 0;
+}
+```
+
+## 虚析构和纯虚析构
+**问题：** 多态使用时，如果子类中有属性开辟到堆区，父类指针在释放时无法调用子类的析构代码
+**解决方法：** 将父类中的析构函数 改为 **虚析构** 或者 **纯虚析构**
+
+虚析构和纯虚析构共性：
+- 可以解决父类指针释放子类对象
+- 需要有具体的函数实现
+
+**注：**
+- 纯虚析构需要 **声明** 也需要 **实现**
+- 如果是纯虚析构，该类属于抽象类，无法实例化对象
+- 虚析构： `virtual ~类名()`
+- 纯虚析构： `virtual ~类名() = 0;`
+- 如果子类中没有堆区数据，可以不写为虚析构构或纯虚析构
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Animal
+{
+public:
+    // 纯虚函数
+    virtual void speak() = 0;
+    Animal()
+    {
+        cout << "Calling an Animal constractor" << endl;
+    }
+    // 虚析构
+    // virtual ~Animal()
+    // {
+    //     cout << "Calling an Animal virtual destractor" << endl;
+    // }
+
+    // 纯虚析构 声明
+    virtual ~Animal() = 0;
+};
+
+void Animal::speak()
+{
+    cout << "Animal is speaking" << endl;
+}
+
+// 纯虚析构 实现
+Animal::~Animal()
+{
+    cout << "Calling an Animal pure virtual destractor" << endl;
+}
+
+class Cat : public Animal
+{
+public:
+    string * name;
+    Cat(string n)
+    {
+        cout << "Calling a Cat constractor" << endl;
+        name = new string(n);
+    }
+    ~Cat()
+    {
+        if (name != NULL)
+        {
+            cout << "Calling a Cat destractor" << endl;
+            delete name;
+            name = NULL;
+        }
+    }
+    void speak();
+};
+
+void Cat::speak()
+{
+    cout << *name << " Cat is speaking" << endl;
+}
+
+
+void test01()
+{
+    Animal * animal = new Cat("Tom");
+    animal->speak();
+    // 父类指针在析构时候，不会调用子类中析构函数，导致如果子类有堆区属性，出现内存泄漏
+    // 利用 虚析构 解决父类指针释放子类对象时不干净的问题
+    delete animal;
+}
+
+
+int main(int argc, char const *argv[])
+{
+    test01();
+    return 0;
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
