@@ -295,3 +295,137 @@ void myPrint(int a, int b)
 - 针对自定义类型，提供模板的重载，可以为特定的类型提供 **具体化的模板**
 - 语法： `template<> 返回值类型 函数名(特定类)` 实现具体化重载
 - 学习模板是为了在STL中运用系统提供的模板
+# 类模板
+- 建立一个通用的类，类中的成员和数据类型可以不指定具体类型，用一个 **虚拟的类型** 来代表
+- **语法：** `template<class T>` 代码后面写一个 **类**，`class` 可以用 `typename` 替换
+
+## 类模板和函数模板区别
+1. 类模板没有 **自定义推导** 的使用方式
+2. 类模板在模板参数列表中可以有 **默认参数**
+
+```cpp
+#include<iostream>
+#include<string>
+using namespace std;
+
+template<class nameType, class ageType = int>// 默认参数int
+class Person
+{
+public:
+    nameType name;
+    ageType age;
+    Person(nameType name, ageType age)
+    {
+        this->name = name;
+        this->age = age;
+    }
+    void printPerson()
+    {
+        cout << "name: " << this->name << "\tage: " << this->age << endl;
+    }
+};
+
+void test01()
+{
+    // Person p("孙悟空",999);// INVALID
+    Person<string, int>p("孙悟空",999);//VALID
+    p.printPerson();
+}
+
+void test02()
+{
+    Person<string>p("猪八戒",999);
+    p.printPerson();
+}
+
+int main(int argc, char const *argv[])
+{
+    test01();
+    test02();
+    return 0;
+}
+```
+## 类模板中成员函数创建时机
+- 普通类中成员函数一开始就创建
+- 类模板中成员函数 **调用时** 才创建
+
+## 类模板对象做函数参数
+三种传入方式：
+1. 指定传入类型     直接显示对象的数据类型      **使用广泛**
+2. 参数模板化       将对象的参数 变为模板 传递
+3. 整个类模板化     将这个对象类型 变为模板 传递
+
+```cpp
+#include<string>
+#include<iostream>
+using namespace std;
+
+template<class T, class P>
+class Person
+{
+public:
+    T name;
+    P age;
+    Person(T name, P age)
+    {
+        this->name = name;
+        this->age = age;
+    }
+    void showPerson()
+    {
+        cout << "name: " << this->name << "\tage: " << this->age << endl;
+    }
+};
+
+// 指定传入类型
+void printPerson1(Person<string,int>& p)
+{
+    p.showPerson();
+}
+
+void test01()
+{
+    Person<string,int>p("孙悟空", 1000);
+    printPerson1(p);
+}
+
+// 参数模板化
+template<class T, class P>
+void printPerson2(Person<T, P>& p)
+{
+    p.showPerson();
+    cout << "T: " << typeid(T).name() << endl << "P: " << typeid(P).name() << endl;
+}
+
+void test02()
+{
+    Person<string,int>p("猪八戒", 900);
+    printPerson2(p);
+}
+
+// 整个类模板化
+template<class T>
+void printPerson3(T& p)
+{
+    p.showPerson();
+}
+
+void test03()
+{
+    Person<string,int>p("唐僧", 20);
+    printPerson3(p);
+}
+
+int main()
+{
+    test01();
+    test02();
+    test03();
+    return 0;
+}
+```
+## 类模板与继承
+## 类模板成员函数类外实现
+## 类模板分文件编写
+## 类模板与友元
+## 类模板案例
