@@ -43,16 +43,18 @@ public:
     void setElement(int m, int n, double value);
     Matrix operator+(const Matrix& matrix);
     Matrix operator-(const Matrix& matrix);
-    Matrix operator*(double multiple);
-    Matrix operator*(const Matrix& matrix);
-    friend Matrix operator*(double multiple, const Matrix& matrix);
-    Matrix operator/(const Matrix& matrix);// 未完成
+    Matrix operator*(double multiple);// 矩阵 * 数
+    Matrix operator*(const Matrix& matrix);// 矩阵 * 矩阵
+    friend Matrix operator*(double multiple, const Matrix& matrix);// 数 * 矩阵
+    Matrix operator/(const Matrix& matrix);// 矩阵 / 矩阵
     Matrix& operator=(const Matrix& matrix);// 赋值运算符重载
     Matrix operator-() const;// 一元负号运算符
     friend ostream& operator<<(ostream& output, const Matrix& matrix);
+    Matrix& operator++();// ++obj 自定义运算 所有元素自增
+    Matrix operator++(int);// obj++
     Matrix Transpose();
-    double Determinant();// 未完成
-    Matrix Inverse();// 未完成
+    double Determinant() const;
+    Matrix Inverse() const;
     ~Matrix();
 };
 #endif
@@ -129,16 +131,16 @@ int Matrix::getColumn() const
     return this->column;
 }
 
-void Matrix::setElement(int m, int n, double value)
-{
-    assert(m >= 0 && m < this->row && n >= 0 && n < this->column);
-    this->elements[m][n] = value;
-}
-
 double Matrix::getElement(int m, int n) const
 {
     assert(m >= 0 && m < this->row && n >= 0 && n < this->column);
     return this->elements[m][n];
+}
+
+void Matrix::setElement(int m, int n, double value)
+{
+    assert(m >= 0 && m < this->row && n >= 0 && n < this->column);
+    this->elements[m][n] = value;
 }
 
 Matrix Matrix::operator+(const Matrix& matrix)
@@ -161,6 +163,20 @@ Matrix Matrix::operator-(const Matrix& matrix)
     return (*this + (-1 * matrix));
 }
 
+Matrix Matrix::operator*(double multiple)// 成员函数，矩阵 * 数
+{
+    Matrix result(this->row, this->column);
+    for (int i = 0; i < this->row; i++)
+    {
+        for (int j = 0; j < this->column; j++)
+        {
+            double elemValue = multiple * this->getElement(i, j);
+            result.setElement(i, j, elemValue);
+        }
+    }
+    return result;
+}
+
 Matrix Matrix::operator*(const Matrix& matrix)
 {
     assert(this->column == matrix.getRow());
@@ -174,20 +190,6 @@ Matrix Matrix::operator*(const Matrix& matrix)
             {
                 elemValue += this->getElement(i, k) * matrix.getElement(k, j);
             }
-            result.setElement(i, j, elemValue);
-        }
-    }
-    return result;
-}
-
-Matrix Matrix::operator*(double multiple)// 成员函数，矩阵 * 数
-{
-    Matrix result(this->row, this->column);
-    for (int i = 0; i < this->row; i++)
-    {
-        for (int j = 0; j < this->column; j++)
-        {
-            double elemValue = multiple * this->getElement(i, j);
             result.setElement(i, j, elemValue);
         }
     }
@@ -208,17 +210,9 @@ Matrix operator*(double multiple, const Matrix& matrix)// 全局函数，数 * �
     return result;
 }
 
-ostream& operator<<(ostream& output, const Matrix& matrix)
+Matrix Matrix::operator/(const Matrix& matrix)
 {
-    for (int i = 0; i < matrix.getRow(); i++)
-    {
-        for (int j = 0; j < matrix.getColumn(); j++)
-        {
-            output << matrix.getElement(i, j) << '\t';
-        }
-        cout << endl;
-    }
-    return output;
+    return (matrix.Inverse() * (*this));
 }
 
 Matrix& Matrix::operator=(const Matrix& matrix)
@@ -257,6 +251,45 @@ Matrix Matrix::operator-() const
     return (-1 * (*this));
 }
 
+ostream& operator<<(ostream& output, const Matrix& matrix)
+{
+    for (int i = 0; i < matrix.getRow(); i++)
+    {
+        for (int j = 0; j < matrix.getColumn(); j++)
+        {
+            output << matrix.getElement(i, j) << '\t';
+        }
+        cout << endl;
+    }
+    return output;
+}
+
+Matrix& Matrix::operator++()
+{
+    for (int i = 0; i < this->row; i++)
+    {
+        for (int j = 0; j < this->getColumn(); j++)
+        {
+            this->setElement(i, j, this->getElement(i,j) + 1);
+        }
+    }
+    return *this;
+}
+
+Matrix Matrix::operator++(int)
+{
+    Matrix temp(this->getRow(), this->getColumn());
+    for (int i = 0; i < this->row; i++)
+    {
+        for (int j = 0; j < this->getColumn(); j++)
+        {
+            temp.setElement(i, j, this->getElement(i, j));
+            this->setElement(i, j, this->getElement(i,j) + 1);
+        }
+    }
+    return temp;
+}
+
 Matrix Matrix::Transpose()
 {
     assert(this->getRow() > 0 && this->getColumn() > 0);
@@ -269,6 +302,61 @@ Matrix Matrix::Transpose()
         }
     }
     return matrix;
+}
+
+double Matrix::Determinant() const
+{
+    assert(this->getRow() == this->getColumn());
+    if (this->getRow() == 1)
+    {
+        return this->getElement(0, 0);
+    }
+    else
+    {
+        double det = 0;
+        for (int i = 0; i < this->getRow(); i++)
+        {
+            if (this->getElement(i, 0))
+            {
+                Matrix* temp = new Matrix(this->getRow() - 1, this->getColumn() - 1);
+                for (int j = 0; j < this->getRow() - 1; j++)
+                {
+                    for (int k = 0; k < this->getColumn() - 1; k++)
+                    {
+                        temp->setElement(j, k, this->getElement(j<i?j:j+1, k+1));
+                    }
+                }
+                det += (temp->Determinant() * this->getElement(i, 0) * ((2+i)%2?-1:1));
+                delete temp;
+                temp = NULL;
+            }
+        }
+        return det;
+    }
+}
+
+Matrix Matrix::Inverse() const
+{
+    assert(this->Determinant());
+    Matrix Adjoint(this->getRow(),this->getColumn());
+    for (int i = 0; i < this->getRow(); i++)
+    {
+        for (int j = 0; j < this->getColumn(); j++)
+        {
+            Matrix* temp = new Matrix(this->getRow() - 1, this->getColumn() - 1);
+            for (int m = 0; m < this->getRow() - 1; m++)
+            {
+                for (int n = 0; n < this->getColumn() - 1; n++)
+                {
+                    temp->setElement(m, n, this->getElement(m<i?m:m+1, n<j?n:n+1));
+                }
+            }
+            Adjoint.setElement(j, i, temp->Determinant() * ((2+i+j)%2?-1:1));
+            delete temp;
+            temp = NULL;
+        }
+    }
+    return 1.0 / this->Determinant() * Adjoint;
 }
 
 Matrix::~Matrix()
@@ -289,7 +377,7 @@ Matrix::~Matrix()
 void test01()
 {
     double a[12] = {1,0,0,1,0,1,0,1,1,1,1,0};
-    double b[16] = {1,2,3,4,1,1,1,1,1,0,0,0,0,1,1,1};
+    double b[16] = {1,2,3,4,1,1,1,1,1,0,0,0,0,1,0,1};
     double c[12] = {1,1,1,1,0,0,0,1,0,0,1,1};
 
     // 构造函数测试
@@ -321,6 +409,10 @@ void test01()
 
     Matrix L = A.Transpose();
     cout << "L = A.Transpose() = " << endl << L << endl;
+    cout << "det(B) = " << B.Determinant() << endl << endl;// 测试行列式
+    cout << "inv(B) = " << endl << B.Inverse() << endl;// 测试矩阵求逆
+    cout << "A++" << endl << A++ << endl << "A = " << endl << A << endl;
+    cout << "++A" << endl << ++A << endl;
 }
 
 int main()
