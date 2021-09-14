@@ -351,11 +351,9 @@ int main(int argc, char const *argv[])
 
 ## 类模板对象做函数参数
 三种传入方式：
-方法|内容|说明
-----------|-------------|---------
-指定传入类型 | 直接显示对象的数据类型 | **使用广泛**
-参数模板化 | 将对象的参数 变为模板 传递
-整个类模板化 | 将这个对象类型 变为模板 传递
+1. 指定传入类型 直接显示对象的数据类型 **使用广泛**
+2. 参数模板化 将对象的 **参数** 变为模板传递
+3. 整个类模板化 将整个 **对象类型** 变为模板传递
 
 ```cpp
 #include<string>
@@ -380,6 +378,7 @@ public:
 };
 
 // 指定传入类型
+// 查验"班次、日期"后放行
 void printPerson1(Person<string,int>& p)
 {
     p.showPerson();
@@ -392,6 +391,7 @@ void test01()
 }
 
 // 参数模板化
+// 查验是"车票"后放行
 template<class T, class P>
 void printPerson2(Person<T, P>& p)
 {
@@ -406,6 +406,7 @@ void test02()
 }
 
 // 整个类模板化
+// 所有人都放行
 template<class T>
 void printPerson3(T& p)
 {
