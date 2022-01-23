@@ -3,9 +3,9 @@ title: LaTeX
 date: 2022-01-19 20:06:35
 tags:
 ---
-## Visual Studio Code配置
+## TeX Live编译环境配置
 
-### Windows环境下Tex Live配置
+### Windows环境Visiual Studio Code
 
 ```json
 /*----------------------------------------------------------------*/
