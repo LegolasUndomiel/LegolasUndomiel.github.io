@@ -114,6 +114,7 @@ ping github.com -c n
   2. 在[网易云音乐官网](https://music.163.com/)下载适用于Ubuntu系统的``netease-cloud-music``安装包
   3. 在[坚果云官网](https://www.jianguoyun.com/)下载适用于Ubuntu系统的``nautilus_nutstore``安装包
   4. 在[Edge官网](https://www.microsoft.com/zh-cn/edge)下载适用于Ubuntu系统的``Edge浏览器``安装包
+  5. 在[Deskreen官网](https://deskreen.com/lang-en)下载适用于Ubuntu系统的``Deskreen``安装包
 
 - 软件安装
 
@@ -134,6 +135,10 @@ sudo apt install vim
 sudo apt install neovim
 # neofetch
 sudo apt install neofetch
+# aria2
+sudo apt-get install aria2 -y
+# uGet下载器
+sudo apt-get install uget -y
 ```
 
 ## UxPlay安装
