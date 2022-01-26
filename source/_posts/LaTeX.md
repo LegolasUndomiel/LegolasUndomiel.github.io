@@ -3,7 +3,78 @@ title: LaTeX
 date: 2022-01-19 20:06:35
 tags:
 ---
-## TeX Live编译环境配置
+## TeX Live编译环境安装与卸载
+
+### 完全卸载TeX Live编译环境
+
+```bash
+sudo apt-get purge texlive*
+sudo rm -rf /usr/local/texlive/*
+sudo rm -rf ~/.texlive*
+sudo rm -rf /usr/local/share/texmf
+sudo rm -rf /var/lib/texmf
+sudo rm -rf /etc/texmf
+sudo apt-get remove tex-common --purge
+sudo rm -rf ~/.texlive
+```
+
+### 安装依赖
+
+```bash
+sudo apt install perl-tk
+```
+
+### 下载镜像安装版
+
+在[LaTeX官网](https://www.latex-project.org/)通过国内镜像网站下载``iso``镜像安装包
+
+### 挂载镜像文件
+
+```bash
+sudo mount -o loop texlive.iso /mnt
+```
+
+### 安装TeX Live
+
+```bash
+cd /mnt
+sudo ./install-tl
+```
+
+### 卸载镜像文件
+
+```bash
+sudo umount /mnt
+```
+
+### 添加环境变量
+
+```bash
+sudo vim ~/.bashrc
+# 添加环境变量至配置文件
+export PATH=/usr/local/texlive/2021/bin/x86_64-linux:$PATH
+export MANPATH=/usr/local/texlive/2021/texmf-dist/doc/man:$MANPATH
+export INFOPATH=/usr/local/texlive/2021/texmf-dist/doc/info:$INFOPATH3
+```
+
+### 字体配置
+
+```bash
+sudo cp /usr/local/texlive/2021/texmf-var/fonts/conf/texlive-fontconfig.conf /etc/fonts/conf.d/09-texlive.conf
+sudo fc-cache -fv
+sudo apt-get install texlive-lang-chinese
+sudo apt-get install texlive-latex-base texlive-latex-extra texlive-latex-recommended texlive-fonts-recommended
+# 重启电脑
+sudo shutdown -r
+```
+
+### TeX Studio安装
+
+```bash
+sudo apt-get install texstudio
+```
+
+## TeX Live环境配置
 
 ### Windows环境Visiual Studio Code
 
