@@ -8,7 +8,7 @@ tags:
 
 ```bash
 # deploy.sh
-for i in {1..100}
+for i in {1..10}
 do
     hexo clean
     hexo g
@@ -20,4 +20,5 @@ done
 
 ```bash
 chmod +777 ./deploy.sh
+./deploy.sh
 ```
