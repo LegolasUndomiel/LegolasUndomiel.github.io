@@ -6,6 +6,64 @@ tags:
 
 ## EFI引导分区卸载
 
+## Ubuntu镜像源
+
+参考教程[ubuntu20.04更改国内镜像源](https://blog.csdn.net/qq_33706673/article/details/106869016)
+参考教程[ubuntu20.04 LTS 更换国内163源、阿里源、清华源、中科大源](https://www.cnblogs.com/zqifa/p/12910989.html)
+
+```bash
+# 中科大源
+deb https://mirrors.ustc.edu.cn/ubuntu/ focal main restricted universe multiverse
+deb-src https://mirrors.ustc.edu.cn/ubuntu/ focal main restricted universe multiverse
+deb https://mirrors.ustc.edu.cn/ubuntu/ focal-updates main restricted universe multiverse
+deb-src https://mirrors.ustc.edu.cn/ubuntu/ focal-updates main restricted universe multiverse
+deb https://mirrors.ustc.edu.cn/ubuntu/ focal-backports main restricted universe multiverse
+deb-src https://mirrors.ustc.edu.cn/ubuntu/ focal-backports main restricted universe multiverse
+deb https://mirrors.ustc.edu.cn/ubuntu/ focal-security main restricted universe multiverse
+deb-src https://mirrors.ustc.edu.cn/ubuntu/ focal-security main restricted universe multiverse
+deb https://mirrors.ustc.edu.cn/ubuntu/ focal-proposed main restricted universe multiverse
+deb-src https://mirrors.ustc.edu.cn/ubuntu/ focal-proposed main restricted universe multiverse
+
+# 清华源
+# 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-updates main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-updates main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-backports main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-backports main restricted universe multiverse
+deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-security main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-security main restricted universe multiverse
+
+# 预发布软件源，不建议启用
+# deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-proposed main restricted universe multiverse
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-proposed main restricted universe multiverse
+
+# 阿里源
+deb http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse
+
+# 网易源
+deb http://mirrors.163.com/ubuntu/ focal main restricted universe multiverse
+deb http://mirrors.163.com/ubuntu/ focal-security main restricted universe multiverse
+deb http://mirrors.163.com/ubuntu/ focal-updates main restricted universe multiverse
+deb http://mirrors.163.com/ubuntu/ focal-proposed main restricted universe multiverse
+deb http://mirrors.163.com/ubuntu/ focal-backports main restricted universe multiverse
+deb-src http://mirrors.163.com/ubuntu/ focal main restricted universe multiverse
+deb-src http://mirrors.163.com/ubuntu/ focal-security main restricted universe multiverse
+deb-src http://mirrors.163.com/ubuntu/ focal-updates main restricted universe multiverse
+deb-src http://mirrors.163.com/ubuntu/ focal-proposed main restricted universe multiverse
+deb-src http://mirrors.163.com/ubuntu/ focal-backports main restricted universe multiverse
+```
+
 ## DNS
 
 ### DNS设置
@@ -125,6 +183,8 @@ ping github.com -c n
   ```
 
 ## apt命令行软件安装
+
+参考教程[PDF阅读器——Zathura](https://zhuanlan.zhihu.com/p/80184476)
 
 ```bash
 # Zathura轻量级pdf阅读器

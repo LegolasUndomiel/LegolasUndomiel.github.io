@@ -5,6 +5,11 @@ tags:
 ---
 ## TeX Live编译环境安装与卸载
 
+参考教程[Installing Texlive Latest Version on Ubuntu](https://fahim-sikder.github.io/post/installing-texlive-latest-ubuntu/)
+参考教程[Linux(Ubuntu)配置TeX Live2021-知乎专栏](https://zhuanlan.zhihu.com/p/370950462)
+参考教程[在Ubuntu(Linux)下配置Latex环境](https://blog.csdn.net/Zhang_Pro/article/details/106988187)
+参考教程[Linux系统下安装texlive](https://blog.csdn.net/qq_46753404/article/details/116240081)
+
 ### 完全卸载TeX Live编译环境
 
 ```bash
