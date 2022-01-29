@@ -166,25 +166,16 @@ sudo apt-get install uget -y
 
   ```bash
   cd ~/Downloads/UxPlay
-  sudo mkdir uxplay
-  cd ~/Downloads/UxPlay/uxplay
-  cmake ..
-  make
+  sudo cmake .
+  sudo make
   sudo make install
-  ```
-
-- 移动项目
-
-  ```bash
-  sudo mkdir /usr/local/uxplay
-  sudo mv ~/Downloads/UxPlay/uxplay/* /usr/local/uxplay/
   ```
 
 - 配置bash命令
 
   ```bash
   sudo vim ~/.bashrc
-  alias uxplay="/usr/local/uxplay/uxplay"
+  alias uxplay="/usr/local/bin/uxplay"
   ```
 
 - 运行程序
