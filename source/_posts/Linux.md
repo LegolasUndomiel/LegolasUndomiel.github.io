@@ -108,6 +108,17 @@ ping github.com -c n
 sudo apt-get install fcitx fcitx-*
 ```
 
+### 配置fcitx
+
+```bash
+# 使用vim编辑
+sudo vim /etc/environment
+# 添加环境配置，配置文件中不能有回车换行符，因此使用vim换行
+GTK_IM_MODULE=fcitx
+QT_IM_MODULE=fcitx
+XMODIFIERS=@im=fcitx
+```
+
 ### 完全卸载``fcitx``
 
 ```bash
