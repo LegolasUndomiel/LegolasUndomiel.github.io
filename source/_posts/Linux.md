@@ -32,7 +32,7 @@ Reg add HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation /v RealTimeIsU
 ### 补充说明
 
 - 两种方案选择其中一即可解决时间同步问题
-- 如果同时使用了两种方案，两个系统时间相差8小时(东八区，UTC+8)，将方案二中``RealTimeIsUniversal``的值改为0即可，位置在注册表``regedit`` 中 ``HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation\``处
+- 如果同时使用了两种方案，两个系统时间相差8小时(东八区，UTC+8)，将方案二中``RealTimeIsUniversal``的值改为0即可，位置在注册表``regedit``中``HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation\``处
 
 ## Ubuntu镜像源
 
