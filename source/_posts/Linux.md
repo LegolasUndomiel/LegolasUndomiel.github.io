@@ -6,6 +6,34 @@ tags:
 
 ## EFI引导分区卸载
 
+## 双系统时间不一致解决方案
+
+参考教程[双系统时间不一致解决方案](https://blog.csdn.net/zhouchen1998/article/details/108893660)
+
+### Kubuntu(Linux)下解决方案
+
+```bash
+# 安装ntpdate
+sudo apt-get install ntpdate
+# 连接到Windows时间服务器
+sudo ntpdate time.windows.com
+# 更新到硬件时间
+sudo hwclock --localtime --systohc
+```
+
+### Windows下解决方案
+
+以管理员身份打开``Powershell``
+
+```bash
+Reg add HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation /v RealTimeIsUniversal /t REG_DWORD /d 1
+```
+
+### 补充说明
+
+- 两种方案选择其中一即可解决时间同步问题
+- 如果同时使用了两种方案，两个系统时间相差8小时(东八区，UTC+8)，将方案二中``RealTimeIsUniversal``的值改为0即可，位置在注册表``regedit`` 中 ``HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation\``处
+
 ## Ubuntu镜像源
 
 参考教程[ubuntu20.04更改国内镜像源](https://blog.csdn.net/qq_33706673/article/details/106869016)
