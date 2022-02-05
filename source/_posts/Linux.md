@@ -285,3 +285,52 @@ alias uxplay="/usr/local/bin/uxplay"
 ### 运行程序
 
 确定PC和iPad在相同的WiFi环境下，在``bash``里面输入``uxplay``命令后，在iPad中进行连接
+
+## Scrcpy安装配置
+
+参考教程[Ubuntu安装scrcpy完成手机投屏和控制](https://cloud.tencent.com/developer/article/1721750)
+参考教程[ubuntu使用scrcpy手机投屏](https://www.cnblogs.com/hesse-summer/p/11200260.html)
+
+### HarmonyOS手机开启开发者模式
+
+1. 在``关于手机``中多次点击``版本号``
+2. 在``系统和更新``中点击``开发人员选项``，打开``USB调试``
+
+### Scrcpy安装
+
+```bash
+# Srccpy
+sudo apt-get install scrcpy
+# adb服务
+sudo apt-get install android-tools-adb
+# 查看手机USB识别号
+lsusb
+# 新建配置文件夹(如果没有)
+mkdir ~/.android
+# 创建配置文件
+echo 0x12d1 > ~/.android/adb_usb.ini
+sudo touch /etc/udev/rules.d/android.rules
+# 编辑配置文件
+sudo vim /etc/udev/rules.d/android.rules
+SUBSYSTEM=="usb", SYSFS{idVendor}=="12d1", MODE="0666"
+# 修改文件权限
+sudo chmod 777 /etc/udev/rules.d/android.rules
+```
+
+### 启用adb服务
+
+```bash
+service udev restart
+# 关闭adb旧服务
+adb kill-server
+# 开启adb服务
+adb start-server
+# 查看设备
+adb devices
+# 开启scrcpy应用
+scrcpy
+```
+
+### 说明
+
+- 开启adb服务后就会一直保持开启状态，包括重启后，除非手动关闭
