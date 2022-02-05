@@ -162,6 +162,50 @@ sudo add-apt--repository ppa:hosxy/fcitx5
 sudo apt install fcitx5 fcitx5-*
 ```
 
+## Visual Studio Code安装与配置
+
+### Settings配置文件
+
+```json
+  "workbench.colorCustomizations": {
+    "terminal.foreground":"#BCBABE",
+    "terminalCursor.background":"#BCBABE",
+    "terminalCursor.foreground":"#BCBABE",
+    "terminal.ansiBlack":"#2E2A31",
+    "terminal.ansiBlue":"#796AF5",
+    "terminal.ansiBrightBlack":"#838085",
+    "terminal.ansiBrightBlue":"#796AF5",
+    "terminal.ansiBrightCyan":"#149BDA",
+    "terminal.ansiBrightGreen":"#17AD98",
+    "terminal.ansiBrightMagenta":"#BB60EA",
+    "terminal.ansiBrightRed":"#D8137F",
+    "terminal.ansiBrightWhite":"#F5F4F7",
+    "terminal.ansiBrightYellow":"#DC8A0E",
+    "terminal.ansiCyan":"#149BDA",
+    "terminal.ansiGreen":"#17AD98",
+    "terminal.ansiMagenta":"#BB60EA",
+    "terminal.ansiRed":"#D8137F",
+    "terminal.ansiWhite":"#BCBABE",
+    "terminal.ansiYellow":"#DC8A0E"
+  },
+  "workbench.colorTheme": "One Dark Pro",
+  "workbench.iconTheme": "vscode-icons",
+  "editor.fontSize": 14,
+  "editor.lineNumbers": "relative",
+  "editor.minimap.enabled": true,
+  "editor.tabSize": 4,
+  "editor.wordWrap": "wordWrapColumn",
+  "editor.wordWrapColumn": 80,
+  "files.associations": {
+    "*.m": "matlab",
+    "*.h": "cpp",
+  },
+  "files.autoGuessEncoding": true,
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1000,
+  "terminal.integrated.fontSize": 12,
+```
+
 ## Zotero安装
 
 ### 下载安装包
