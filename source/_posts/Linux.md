@@ -168,6 +168,7 @@ sudo apt install fcitx5 fcitx5-*
 
 ```json
   "editor.fontSize": 15,
+  "editor.lineHeight": 21,
   "editor.lineNumbers": "relative",
   "editor.minimap.enabled": true,
   "editor.renderWhitespace": "boundary",
@@ -184,6 +185,7 @@ sudo apt install fcitx5 fcitx5-*
   "files.autoSave": "afterDelay",
   "files.autoSaveDelay": 1000,
   "terminal.integrated.fontSize": 14,
+  "terminal.integrated.lineHeight": 1.2,
   "window.zoomLevel": 0.25,
   "workbench.colorCustomizations":
   {
