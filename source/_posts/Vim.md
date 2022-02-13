@@ -16,4 +16,66 @@ tags:
   "vim.autoSwitchInputMethod.defaultIM": "1",
   "vim.autoSwitchInputMethod.obtainIMCmd": "/usr/bin/fcitx-remote",
   "vim.autoSwitchInputMethod.switchIMCmd": "/usr/bin/fcitx-remote -t {im}",
+  "vim.handleKeys": {
+    "<C-f>": false,
+    "<C-F>": false,
+    "<C-b>": false,
+    "<C-w>": false,
+    "<C-k>": false,
+    "<C-z>": false
+  },
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["Up"],
+      "after": ["Nop"]
+    },
+    {
+      "before": ["Down"],
+      "after": ["Nop"]
+    },
+    {
+      "before": ["Left"],
+      "after": ["Nop"]
+    },
+    {
+      "before": ["Right"],
+      "after": ["Nop"]
+    },
+  ],
+  "vim.insertModeKeyBindings": [
+    {
+      "before": ["Up"],
+      "after": ["Nop"]
+    },
+    {
+      "before": ["Down"],
+      "after": ["Nop"]
+    },
+    {
+      "before": ["Left"],
+      "after": ["Nop"]
+    },
+    {
+      "before": ["Right"],
+      "after": ["Nop"]
+    },
+  ],
+  "vim.visualModeKeyBindings": [
+    {
+      "before": ["Up"],
+      "after": ["Nop"]
+    },
+    {
+      "before": ["Down"],
+      "after": ["Nop"]
+    },
+    {
+      "before": ["Left"],
+      "after": ["Nop"]
+    },
+    {
+      "before": ["Right"],
+      "after": ["Nop"]
+    },
+  ],
 ```
