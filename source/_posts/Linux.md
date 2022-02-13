@@ -167,9 +167,29 @@ sudo apt install fcitx5 fcitx5-*
 ### Settings配置文件
 
 ```json
-  "workbench.colorCustomizations": {
+  "editor.fontSize": 15,
+  "editor.lineHeight": 21,
+  "editor.lineNumbers": "relative",
+  "editor.minimap.enabled": true,
+  "editor.renderWhitespace": "boundary",
+  "editor.suggestSelection": "first",
+  "editor.tabSize": 4,
+  "editor.wordWrap": "wordWrapColumn",
+  "editor.wordWrapColumn": 90,
+  "files.associations":
+  {
+    "*.m": "matlab",
+    "*.h": "cpp",
+  },
+  "files.autoGuessEncoding": true,
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1000,
+  "terminal.integrated.fontSize": 14,
+  "terminal.integrated.lineHeight": 1.2,
+  "window.zoomLevel": 0.25,
+  "workbench.colorCustomizations":
+  {
     "terminal.foreground":"#BCBABE",
-    "terminalCursor.background":"#BCBABE",
     "terminalCursor.foreground":"#BCBABE",
     "terminal.ansiBlack":"#2E2A31",
     "terminal.ansiBlue":"#796AF5",
@@ -190,20 +210,6 @@ sudo apt install fcitx5 fcitx5-*
   },
   "workbench.colorTheme": "One Dark Pro",
   "workbench.iconTheme": "vscode-icons",
-  "editor.fontSize": 14,
-  "editor.lineNumbers": "relative",
-  "editor.minimap.enabled": true,
-  "editor.tabSize": 4,
-  "editor.wordWrap": "wordWrapColumn",
-  "editor.wordWrapColumn": 80,
-  "files.associations": {
-    "*.m": "matlab",
-    "*.h": "cpp",
-  },
-  "files.autoGuessEncoding": true,
-  "files.autoSave": "afterDelay",
-  "files.autoSaveDelay": 1000,
-  "terminal.integrated.fontSize": 12,
 ```
 
 ## Zotero安装
