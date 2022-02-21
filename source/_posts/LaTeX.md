@@ -208,5 +208,8 @@ sudo apt-get install texstudio
 **常用命令：**
 
 ```bash
+# 详细字数统计信息
+texcount -inc -ch file
+# 简略字数统计信息
 texcount -inc -ch -1 file
 ```
