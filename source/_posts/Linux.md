@@ -261,7 +261,7 @@ sudo ./set_launcher_icon
 ### 创造软链接到应用程序
 
 ```bash
-ln -s /opt/zotero/zotero.desktop ~/.local/share/applications/zotero.desktop
+sudo ln -s /opt/zotero/zotero.desktop ~/.local/share/applications/zotero.desktop
 ```
 
 ### 安装完成
@@ -285,6 +285,10 @@ sudo dpkg -i xxx.deb
 # 安装依赖
 sudo apt-get install -f
 ```
+
+### 注意
+
+- 建议在安装坚果云、Zotero等软件之前先安装Java环境
 
 ## apt命令行软件安装
 

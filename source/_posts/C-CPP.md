@@ -10,6 +10,8 @@ tags:
 
 ### Kubuntu(Linux)环境Visual Studio Code环境配置
 
+在``.vscode``文件夹中创建``tasks.json``和``launch.json``
+
 ```json
 // tasks.json配置文件
 {
