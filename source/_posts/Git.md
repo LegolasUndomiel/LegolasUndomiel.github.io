@@ -4,7 +4,23 @@ date: 2022-03-13 16:20:26
 tags:
 ---
 
+[Git教程-廖雪峰](https://www.liaoxuefeng.com/wiki/896043488029600)
+
 ## 初始化设置
+
+```bash
+# 设置用户名
+git config --global user.name <UserName>
+# 设置用户邮箱
+git config --global user.email <UserEmail>
+# 生成SSH公钥密钥
+ssh-keygen -t rsa -C <UserEmail>
+# 初始化本地仓库
+git init
+```
+
+- ``--global``选项表明这是全局仓库设置，不使用该选项可以给单个仓库单独设置用户名、用户邮箱
+- 初始化本地仓库后，会在当前文件夹生成``.git``隐藏文件夹，``.git``是本地仓库，当前文件夹是工作区，需要使用git进行版本管理的代码要放在当前文件夹或子文件夹里。
 
 ## 建立仓库
 
