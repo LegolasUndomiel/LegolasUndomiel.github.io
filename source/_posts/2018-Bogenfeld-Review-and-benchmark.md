@@ -299,9 +299,9 @@ Bouvet的模拟结果显示与不同的单向层压板的实验结果有很好�
 
 >On the next level of detail, the prediction of inter-fiber fracture is conducted by a micromechanical model.
 >Such a model needs to be coupled with a reference volume element (RVE) in a multiscale approach.
->The damage onset and the matrix damage are predicted on a micro-scale. 
+>The damage onset and the matrix damage are predicted on a micro-scale.
 >Especially for multiaxial loading, such a prediction is superior to homogenized models.
->Micromechanical failure criteria like Huang [43] or energy based matrix failure conditions [44,45] can be used. 
+>Micromechanical failure criteria like Huang [43] or energy based matrix failure conditions [44,45] can be used.
 >Lopes et al published the first impact model on this abstraction scale in 2014 [46], in 2016 Ivančević and Smojver [47] proposed another approach.
 
 在下一个细节层面，纤维间断裂的预测是由微观力学模型进行的。
@@ -334,7 +334,7 @@ Abrate[48]编写的 "复合结构的冲击 "汇编代表了对整个分析方法
 >Also about recent high-fidelity models, reviews have been published.
 >A comparison of the predictive capabilities with different
 >failure criteria was conducted by Liu et al. [32].
->Their model is based on stacked-solid approach with cohesive elements. 
+>Their model is based on stacked-solid approach with cohesive elements.
 >According to their results, the Puck criterion leads to the most reliable results.
 >Force history, energy dissipation, and damage initiation forces were plausibly predicted.
 >Other criteria also lead to proper results.
