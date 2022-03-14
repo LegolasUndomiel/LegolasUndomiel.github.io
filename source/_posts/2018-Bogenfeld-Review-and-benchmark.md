@@ -502,3 +502,33 @@ Riccio和Schwab都通过这种局部冲击损伤分析取得了良好的效果�
 此外，Riccio还介绍了中尺度模型在子结构层面的应用[68]。
 Johnson直接用实际结构的切面进行工作[69]。
 采用分层壳网的低保真方法可以直接应用于结构层面，因为自由度的数量明显减少[20]。
+
+## Applied damage prediction methods
+
+### Delamination threshold forces
+
+### Cohesive zone method(CZM)
+
+### Continuum damage mechnics(CDM)
+
+## Implemented impact models for comparison
+
+### Spring mass model
+
+### Plate model
+
+### Layered-shell model
+
+### Stacked shell model
+
+### Stacked-solid model
+
+### Ply-splitting model
+
+## Benchmark
+
+### Impact test cases
+
+### Analysis Results
+
+### Conclusion of the coupon benchmark
