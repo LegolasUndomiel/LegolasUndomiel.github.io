@@ -26,6 +26,21 @@ git init
 
 ## 分支操作
 
+```bash
+# 切换分支
+git switch <BranchName>
+# 创建并切换到新的分支
+git switch -c <BranchName>
+# 建立本地分支与远程分支的联系
+git branch --set-upstream-to=origin/<BranchName> <BranchName>
+# 合并分支到当前分支
+git merge <BranchName>
+# 删除本地分支
+git branch -d <BranchName>
+# 删除远程分支
+git push origin --delete <BranchName>
+```
+
 ## 标签操作
 
 ```bash
