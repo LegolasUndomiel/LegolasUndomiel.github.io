@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","version":"8.7.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="EFI引导分区卸载双系统时间不一致解决方案参考教程双系统时间不一致解决方案 Kubuntu(Linux)下解决方案123456# 安装ntpdatesudo apt-get install ntpdate# 连接到Windows时间服务器sudo ntpdate time.windows.com# 更新到硬件时间sudo hwclock --localtime --systohc  Windows">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux">
+<meta property="og:url" content="http://example.com/2022/01/23/Linux/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="EFI引导分区卸载双系统时间不一致解决方案参考教程双系统时间不一致解决方案 Kubuntu(Linux)下解决方案123456# 安装ntpdatesudo apt-get install ntpdate# 连接到Windows时间服务器sudo ntpdate time.windows.com# 更新到硬件时间sudo hwclock --localtime --systohc  Windows">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-01-23T12:40:04.000Z">
+<meta property="article:modified_time" content="2022-03-25T12:26:28.142Z">
+<meta property="article:author" content="Legolas Undomiel">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2022/01/23/Linux/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/01/23/Linux/","path":"2022/01/23/Linux/","title":"Linux"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Linux | Hexo</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hexo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#EFI%E5%BC%95%E5%AF%BC%E5%88%86%E5%8C%BA%E5%8D%B8%E8%BD%BD"><span class="nav-number">1.</span> <span class="nav-text">EFI引导分区卸载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8C%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4%E4%B8%8D%E4%B8%80%E8%87%B4%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">2.</span> <span class="nav-text">双系统时间不一致解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Kubuntu-Linux-%E4%B8%8B%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">2.1.</span> <span class="nav-text">Kubuntu(Linux)下解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows%E4%B8%8B%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">2.2.</span> <span class="nav-text">Windows下解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E"><span class="nav-number">2.3.</span> <span class="nav-text">补充说明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ubuntu%E9%95%9C%E5%83%8F%E6%BA%90"><span class="nav-number">3.</span> <span class="nav-text">Ubuntu镜像源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS"><span class="nav-number">4.</span> <span class="nav-text">DNS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS%E8%AE%BE%E7%BD%AE"><span class="nav-number">4.1.</span> <span class="nav-text">DNS设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9host"><span class="nav-number">4.2.</span> <span class="nav-text">修改host</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS%E5%88%B7%E6%96%B0"><span class="nav-number">4.3.</span> <span class="nav-text">DNS刷新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E7%BD%91%E7%BB%9C"><span class="nav-number">4.4.</span> <span class="nav-text">测试网络</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fcitx%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8D%B8%E8%BD%BD"><span class="nav-number">5.</span> <span class="nav-text">fcitx安装与卸载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85fcitx%E8%BE%93%E5%85%A5%E6%B3%95%E6%A1%86%E6%9E%B6"><span class="nav-number">5.1.</span> <span class="nav-text">安装fcitx输入法框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEfcitx"><span class="nav-number">5.2.</span> <span class="nav-text">配置fcitx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%8C%E5%85%A8%E5%8D%B8%E8%BD%BDfcitx"><span class="nav-number">5.3.</span> <span class="nav-text">完全卸载fcitx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85fcitx5%E8%BE%93%E5%85%A5%E6%B3%95%E6%A1%86%E6%9E%B6"><span class="nav-number">5.4.</span> <span class="nav-text">安装fcitx5输入法框架</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Visual-Studio-Code%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE"><span class="nav-number">6.</span> <span class="nav-text">Visual Studio Code安装与配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Settings%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">6.1.</span> <span class="nav-text">Settings配置文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Zotero%E5%AE%89%E8%A3%85"><span class="nav-number">7.</span> <span class="nav-text">Zotero安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85%E5%8C%85"><span class="nav-number">7.1.</span> <span class="nav-text">下载安装包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%8E%8B%E6%96%87%E4%BB%B6"><span class="nav-number">7.2.</span> <span class="nav-text">解压文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAZotero%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-number">7.3.</span> <span class="nav-text">创建Zotero文件夹</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E5%88%B6%E8%A7%A3%E5%8E%8B%E6%96%87%E4%BB%B6"><span class="nav-number">7.4.</span> <span class="nav-text">复制解压文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0zotero%E7%9A%84%E6%A1%8C%E9%9D%A2%E4%BD%8D%E7%BD%AE"><span class="nav-number">7.5.</span> <span class="nav-text">更新zotero的桌面位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E9%80%A0%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%88%B0%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F"><span class="nav-number">7.6.</span> <span class="nav-text">创造软链接到应用程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%AE%8C%E6%88%90"><span class="nav-number">7.7.</span> <span class="nav-text">安装完成</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#deb%E5%AE%89%E8%A3%85%E5%8C%85%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85"><span class="nav-number">8.</span> <span class="nav-text">deb安装包软件安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%8C%85%E4%B8%8B%E8%BD%BD"><span class="nav-number">8.1.</span> <span class="nav-text">安装包下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85"><span class="nav-number">8.2.</span> <span class="nav-text">软件安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F"><span class="nav-number">8.3.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#apt%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85"><span class="nav-number">9.</span> <span class="nav-text">apt命令行软件安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UxPlay%E5%AE%89%E8%A3%85"><span class="nav-number">10.</span> <span class="nav-text">UxPlay安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96"><span class="nav-number">10.1.</span> <span class="nav-text">安装依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%8B%E9%9A%86%E4%BB%93%E5%BA%93"><span class="nav-number">10.2.</span> <span class="nav-text">克隆仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E9%A1%B9%E7%9B%AE"><span class="nav-number">10.3.</span> <span class="nav-text">编译项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEbash%E5%91%BD%E4%BB%A4"><span class="nav-number">10.4.</span> <span class="nav-text">配置bash命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F"><span class="nav-number">10.5.</span> <span class="nav-text">运行程序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scrcpy%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE"><span class="nav-number">11.</span> <span class="nav-text">Scrcpy安装配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HarmonyOS%E6%89%8B%E6%9C%BA%E5%BC%80%E5%90%AF%E5%BC%80%E5%8F%91%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="nav-number">11.1.</span> <span class="nav-text">HarmonyOS手机开启开发者模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scrcpy%E5%AE%89%E8%A3%85"><span class="nav-number">11.2.</span> <span class="nav-text">Scrcpy安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E7%94%A8adb%E6%9C%8D%E5%8A%A1"><span class="nav-number">11.3.</span> <span class="nav-text">启用adb服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B4%E6%98%8E"><span class="nav-number">11.4.</span> <span class="nav-text">说明</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Legolas Undomiel</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/23/Linux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Legolas Undomiel">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Linux
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-01-23 20:40:04" itemprop="dateCreated datePublished" datetime="2022-01-23T20:40:04+08:00">2022-01-23</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2022-03-25 20:26:28" itemprop="dateModified" datetime="2022-03-25T20:26:28+08:00">2022-03-25</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="EFI引导分区卸载"><a href="#EFI引导分区卸载" class="headerlink" title="EFI引导分区卸载"></a>EFI引导分区卸载</h2><h2 id="双系统时间不一致解决方案"><a href="#双系统时间不一致解决方案" class="headerlink" title="双系统时间不一致解决方案"></a>双系统时间不一致解决方案</h2><p>参考教程<a target="_blank" rel="noopener" href="https://blog.csdn.net/zhouchen1998/article/details/108893660">双系统时间不一致解决方案</a></p>
+<h3 id="Kubuntu-Linux-下解决方案"><a href="#Kubuntu-Linux-下解决方案" class="headerlink" title="Kubuntu(Linux)下解决方案"></a>Kubuntu(Linux)下解决方案</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装ntpdate</span></span><br><span class="line">sudo apt-get install ntpdate</span><br><span class="line"><span class="comment"># 连接到Windows时间服务器</span></span><br><span class="line">sudo ntpdate time.windows.com</span><br><span class="line"><span class="comment"># 更新到硬件时间</span></span><br><span class="line">sudo hwclock --localtime --systohc</span><br></pre></td></tr></table></figure>
+
+<h3 id="Windows下解决方案"><a href="#Windows下解决方案" class="headerlink" title="Windows下解决方案"></a>Windows下解决方案</h3><p>以管理员身份打开<code>Powershell</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Reg add HKLM\SYSTEM\CurrentControlSet\Control\TimeZoneInformation /v RealTimeIsUniversal /t REG_DWORD /d 1</span><br></pre></td></tr></table></figure>
+
+<h3 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h3><ul>
+<li>两种方案选择其中一即可解决时间同步问题</li>
+<li>如果同时使用了两种方案，两个系统时间相差8小时(东八区，UTC+8)，将方案二中<code>RealTimeIsUniversal</code>的值改为0即可，位置在注册表<code>regedit</code>中<code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation\</code>处</li>
+</ul>
+<h2 id="Ubuntu镜像源"><a href="#Ubuntu镜像源" class="headerlink" title="Ubuntu镜像源"></a>Ubuntu镜像源</h2><p>参考教程<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33706673/article/details/106869016">ubuntu20.04更改国内镜像源</a><br>参考教程<a target="_blank" rel="noopener" href="https://www.cnblogs.com/zqifa/p/12910989.html">ubuntu20.04 LTS 更换国内163源、阿里源、清华源、中科大源</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 中科大源</span></span><br><span class="line">deb https://mirrors.ustc.edu.cn/ubuntu/ focal main restricted universe multiverse</span><br><span class="line">deb-src https://mirrors.ustc.edu.cn/ubuntu/ focal main restricted universe multiverse</span><br><span class="line">deb https://mirrors.ustc.edu.cn/ubuntu/ focal-updates main restricted universe multiverse</span><br><span class="line">deb-src https://mirrors.ustc.edu.cn/ubuntu/ focal-updates main restricted universe multiverse</span><br><span class="line">deb https://mirrors.ustc.edu.cn/ubuntu/ focal-backports main restricted universe multiverse</span><br><span class="line">deb-src https://mirrors.ustc.edu.cn/ubuntu/ focal-backports main restricted universe multiverse</span><br><span class="line">deb https://mirrors.ustc.edu.cn/ubuntu/ focal-security main restricted universe multiverse</span><br><span class="line">deb-src https://mirrors.ustc.edu.cn/ubuntu/ focal-security main restricted universe multiverse</span><br><span class="line">deb https://mirrors.ustc.edu.cn/ubuntu/ focal-proposed main restricted universe multiverse</span><br><span class="line">deb-src https://mirrors.ustc.edu.cn/ubuntu/ focal-proposed main restricted universe multiverse</span><br><span class="line"></span><br><span class="line"><span class="comment"># 清华源</span></span><br><span class="line"><span class="comment"># 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释</span></span><br><span class="line">deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal main restricted universe multiverse</span><br><span class="line"><span class="comment"># deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal main restricted universe multiverse</span></span><br><span class="line">deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-updates main restricted universe multiverse</span><br><span class="line"><span class="comment"># deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-updates main restricted universe multiverse</span></span><br><span class="line">deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-backports main restricted universe multiverse</span><br><span class="line"><span class="comment"># deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-backports main restricted universe multiverse</span></span><br><span class="line">deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-security main restricted universe multiverse</span><br><span class="line"><span class="comment"># deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-security main restricted universe multiverse</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 预发布软件源，不建议启用</span></span><br><span class="line"><span class="comment"># deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-proposed main restricted universe multiverse</span></span><br><span class="line"><span class="comment"># deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-proposed main restricted universe multiverse</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 阿里源</span></span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse</span><br><span class="line">deb http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse</span><br><span class="line"></span><br><span class="line"><span class="comment"># 网易源</span></span><br><span class="line">deb http://mirrors.163.com/ubuntu/ focal main restricted universe multiverse</span><br><span class="line">deb http://mirrors.163.com/ubuntu/ focal-security main restricted universe multiverse</span><br><span class="line">deb http://mirrors.163.com/ubuntu/ focal-updates main restricted universe multiverse</span><br><span class="line">deb http://mirrors.163.com/ubuntu/ focal-proposed main restricted universe multiverse</span><br><span class="line">deb http://mirrors.163.com/ubuntu/ focal-backports main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.163.com/ubuntu/ focal main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.163.com/ubuntu/ focal-security main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.163.com/ubuntu/ focal-updates main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.163.com/ubuntu/ focal-proposed main restricted universe multiverse</span><br><span class="line">deb-src http://mirrors.163.com/ubuntu/ focal-backports main restricted universe multiverse</span><br></pre></td></tr></table></figure>
+
+<h2 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h2><h3 id="DNS设置"><a href="#DNS设置" class="headerlink" title="DNS设置"></a>DNS设置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/systemd/resolved.conf</span><br><span class="line"><span class="comment"># 在配置文件中添加DNS信息</span></span><br><span class="line">DNS=8.8.8.8 114.114.114.114</span><br><span class="line">systemctl restart systemd-resolved</span><br><span class="line">systemctl <span class="built_in">enable</span> systemd-resolved</span><br><span class="line"> </span><br><span class="line">sudo mv /etc/resolv.conf  /etc/resolv.conf.bak</span><br><span class="line">sudo ln -s /run/systemd/resolve/resolv.conf /etc/</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改host"><a href="#修改host" class="headerlink" title="修改host"></a>修改host</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/hosts</span><br><span class="line"><span class="comment"># github</span></span><br><span class="line">13.114.40.48    github.com</span><br></pre></td></tr></table></figure>
+
+<h3 id="DNS刷新"><a href="#DNS刷新" class="headerlink" title="DNS刷新"></a>DNS刷新</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemd-resolve --flush-caches</span><br></pre></td></tr></table></figure>
+
+<h3 id="测试网络"><a href="#测试网络" class="headerlink" title="测试网络"></a>测试网络</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 测试连接github网络n次</span></span><br><span class="line">ping github.com -c n</span><br></pre></td></tr></table></figure>
+
+<h2 id="fcitx安装与卸载"><a href="#fcitx安装与卸载" class="headerlink" title="fcitx安装与卸载"></a>fcitx安装与卸载</h2><h3 id="安装fcitx输入法框架"><a href="#安装fcitx输入法框架" class="headerlink" title="安装fcitx输入法框架"></a>安装<code>fcitx</code>输入法框架</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install fcitx fcitx-*</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置fcitx"><a href="#配置fcitx" class="headerlink" title="配置fcitx"></a>配置fcitx</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用vim编辑</span></span><br><span class="line">sudo vim /etc/environment</span><br><span class="line"><span class="comment"># 添加环境配置，配置文件中不能有回车换行符，因此使用vim换行</span></span><br><span class="line">GTK_IM_MODULE=fcitx</span><br><span class="line">QT_IM_MODULE=fcitx</span><br><span class="line">XMODIFIERS=@im=fcitx</span><br></pre></td></tr></table></figure>
+
+<h3 id="完全卸载fcitx"><a href="#完全卸载fcitx" class="headerlink" title="完全卸载fcitx"></a>完全卸载<code>fcitx</code></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get remove fcitx</span><br><span class="line">sudo apt-get remove fcitx-*</span><br><span class="line">sudo apt-get purge fcitx*</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装fcitx5输入法框架"><a href="#安装fcitx5输入法框架" class="headerlink" title="安装fcitx5输入法框架"></a>安装<code>fcitx5</code>输入法框架</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt--repository ppa:hosxy/fcitx5</span><br><span class="line">sudo apt install fcitx5 fcitx5-*</span><br></pre></td></tr></table></figure>
+
+<h2 id="Visual-Studio-Code安装与配置"><a href="#Visual-Studio-Code安装与配置" class="headerlink" title="Visual Studio Code安装与配置"></a>Visual Studio Code安装与配置</h2><h3 id="Settings配置文件"><a href="#Settings配置文件" class="headerlink" title="Settings配置文件"></a>Settings配置文件</h3><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;editor.fontSize&quot;</span>: <span class="number">15</span>,</span><br><span class="line"><span class="string">&quot;editor.lineHeight&quot;</span>: <span class="number">21</span>,</span><br><span class="line"><span class="string">&quot;editor.lineNumbers&quot;</span>: <span class="string">&quot;relative&quot;</span>,</span><br><span class="line"><span class="string">&quot;editor.minimap.enabled&quot;</span>: <span class="literal">true</span>,</span><br><span class="line"><span class="string">&quot;editor.renderWhitespace&quot;</span>: <span class="string">&quot;boundary&quot;</span>,</span><br><span class="line"><span class="string">&quot;editor.suggestSelection&quot;</span>: <span class="string">&quot;first&quot;</span>,</span><br><span class="line"><span class="string">&quot;editor.tabSize&quot;</span>: <span class="number">4</span>,</span><br><span class="line"><span class="string">&quot;editor.wordWrap&quot;</span>: <span class="string">&quot;wordWrapColumn&quot;</span>,</span><br><span class="line"><span class="string">&quot;editor.wordWrapColumn&quot;</span>: <span class="number">90</span>,</span><br><span class="line"><span class="string">&quot;files.associations&quot;</span>:</span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;*.m&quot;</span>: <span class="string">&quot;matlab&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;*.h&quot;</span>: <span class="string">&quot;cpp&quot;</span>,</span><br><span class="line">&#125;,</span><br><span class="line"><span class="string">&quot;files.autoGuessEncoding&quot;</span>: <span class="literal">true</span>,</span><br><span class="line"><span class="string">&quot;files.autoSave&quot;</span>: <span class="string">&quot;afterDelay&quot;</span>,</span><br><span class="line"><span class="string">&quot;files.autoSaveDelay&quot;</span>: <span class="number">1000</span>,</span><br><span class="line"><span class="string">&quot;terminal.integrated.fontSize&quot;</span>: <span class="number">14</span>,</span><br><span class="line"><span class="string">&quot;terminal.integrated.lineHeight&quot;</span>: <span class="number">1.2</span>,</span><br><span class="line"><span class="string">&quot;window.zoomLevel&quot;</span>: <span class="number">0.25</span>,</span><br><span class="line"><span class="string">&quot;workbench.colorCustomizations&quot;</span>:</span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;terminal.foreground&quot;</span>:<span class="string">&quot;#BCBABE&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;terminalCursor.foreground&quot;</span>:<span class="string">&quot;#BCBABE&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;terminal.ansiBlack&quot;</span>:<span class="string">&quot;#2E2A31&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;terminal.ansiBlue&quot;</span>:<span class="string">&quot;#796AF5&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;terminal.ansiBrightBlack&quot;</span>:<span class="string">&quot;#838085&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;terminal.ansiBrightBlue&quot;</span>:<span class="string">&quot;#796AF5&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;terminal.ansiBrightCyan&quot;</span>:<span class="string">&quot;#149BDA&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;terminal.ansiBrightGreen&quot;</span>:<span class="string">&quot;#17AD98&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;terminal.ansiBrightMagenta&quot;</span>:<span class="string">&quot;#BB60EA&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;terminal.ansiBrightRed&quot;</span>:<span class="string">&quot;#D8137F&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;terminal.ansiBrightWhite&quot;</span>:<span class="string">&quot;#F5F4F7&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;terminal.ansiBrightYellow&quot;</span>:<span class="string">&quot;#DC8A0E&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;terminal.ansiCyan&quot;</span>:<span class="string">&quot;#149BDA&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;terminal.ansiGreen&quot;</span>:<span class="string">&quot;#17AD98&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;terminal.ansiMagenta&quot;</span>:<span class="string">&quot;#BB60EA&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;terminal.ansiRed&quot;</span>:<span class="string">&quot;#D8137F&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;terminal.ansiWhite&quot;</span>:<span class="string">&quot;#BCBABE&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;terminal.ansiYellow&quot;</span>:<span class="string">&quot;#DC8A0E&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;editorBracketHighlight.foreground1&quot;</span>: <span class="string">&quot;#8463b1&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;editorBracketHighlight.foreground2&quot;</span>: <span class="string">&quot;#7475be&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;editorBracketHighlight.foreground3&quot;</span>: <span class="string">&quot;#76acce&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;editorBracketHighlight.foreground4&quot;</span>: <span class="string">&quot;#8b71ad&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;editorBracketHighlight.foreground5&quot;</span>: <span class="string">&quot;#7779cc&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;editorBracketHighlight.foreground6&quot;</span>: <span class="string">&quot;#5ba8d8&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;editorBracketHighlight.unexpectedBracket.foreground&quot;</span>: <span class="string">&quot;#6b98d3&quot;</span></span><br><span class="line">&#125;,</span><br><span class="line"><span class="string">&quot;editor.bracketPairColorization.enabled&quot;</span>: <span class="literal">true</span>,</span><br><span class="line"><span class="string">&quot;workbench.colorTheme&quot;</span>: <span class="string">&quot;One Dark Pro&quot;</span>,</span><br><span class="line"><span class="string">&quot;workbench.iconTheme&quot;</span>: <span class="string">&quot;vscode-icons&quot;</span>,</span><br></pre></td></tr></table></figure>
+
+<h2 id="Zotero安装"><a href="#Zotero安装" class="headerlink" title="Zotero安装"></a>Zotero安装</h2><p>参考教程<a target="_blank" rel="noopener" href="https://blog.csdn.net/xinjieyuan/article/details/105407564">ubuntu安装Zotero</a></p>
+<h3 id="下载安装包"><a href="#下载安装包" class="headerlink" title="下载安装包"></a>下载安装包</h3><p><a target="_blank" rel="noopener" href="https://www.zotero.org/">Zotero官网</a></p>
+<h3 id="解压文件"><a href="#解压文件" class="headerlink" title="解压文件"></a>解压文件</h3><p>对于网上直接下载的源码包，最常见的是<code>.tar.gz</code>包和<code>.tar.bz2</code>包，其解压缩命令分别为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf xxx.tar.gz</span><br><span class="line">tar -jxvf xxx.tar.bz2</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建Zotero文件夹"><a href="#创建Zotero文件夹" class="headerlink" title="创建Zotero文件夹"></a>创建Zotero文件夹</h3><p>选择在<code>/opt/</code>目录下创建，因为这个目录下通常放<code>Google Chrome</code>和<code>Mozilla Firefox</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /opt/zotero</span><br></pre></td></tr></table></figure>
+
+<h3 id="复制解压文件"><a href="#复制解压文件" class="headerlink" title="复制解压文件"></a>复制解压文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mv Zotero_linux-x86_64/* /opt/zotero/</span><br></pre></td></tr></table></figure>
+
+<h3 id="更新zotero的桌面位置"><a href="#更新zotero的桌面位置" class="headerlink" title="更新zotero的桌面位置"></a>更新<code>zotero</code>的桌面位置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /opt/zotero</span><br><span class="line">sudo ./set_launcher_icon</span><br></pre></td></tr></table></figure>
+
+<h3 id="创造软链接到应用程序"><a href="#创造软链接到应用程序" class="headerlink" title="创造软链接到应用程序"></a>创造软链接到应用程序</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s /opt/zotero/zotero.desktop ~/.<span class="built_in">local</span>/share/applications/zotero.desktop</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装完成"><a href="#安装完成" class="headerlink" title="安装完成"></a>安装完成</h3><p>此时在<code>Krunner</code>里面搜索<code>zotero</code>即可打开应用</p>
+<h2 id="deb安装包软件安装"><a href="#deb安装包软件安装" class="headerlink" title="deb安装包软件安装"></a>deb安装包软件安装</h2><h3 id="安装包下载"><a href="#安装包下载" class="headerlink" title="安装包下载"></a>安装包下载</h3><ol>
+<li>在<a target="_blank" rel="noopener" href="https://www.edrawsoft.cn/">亿图官网</a>下载适用于Ubuntu系统的<code>mindmaster</code>安装包</li>
+<li>在<a target="_blank" rel="noopener" href="https://music.163.com/">网易云音乐官网</a>下载适用于Ubuntu系统的<code>netease-cloud-music</code>安装包</li>
+<li>在<a target="_blank" rel="noopener" href="https://www.jianguoyun.com/">坚果云官网</a>下载适用于Ubuntu系统的<code>nautilus_nutstore</code>安装包</li>
+<li>在<a target="_blank" rel="noopener" href="https://www.microsoft.com/zh-cn/edge">Edge官网</a>下载适用于Ubuntu系统的<code>Edge浏览器</code>安装包</li>
+<li>在<a target="_blank" rel="noopener" href="https://deskreen.com/lang-en">Deskreen官网</a>下载适用于Ubuntu系统的<code>Deskreen</code>安装包</li>
+</ol>
+<h3 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo dpkg -i xxx.deb</span><br><span class="line"><span class="comment"># 安装依赖</span></span><br><span class="line">sudo apt-get install -f</span><br></pre></td></tr></table></figure>
+
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><ul>
+<li>建议在安装坚果云、Zotero等软件之前先安装Java环境</li>
+</ul>
+<h2 id="apt命令行软件安装"><a href="#apt命令行软件安装" class="headerlink" title="apt命令行软件安装"></a>apt命令行软件安装</h2><p>参考教程<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/80184476">PDF阅读器——Zathura</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Zathura轻量级pdf阅读器</span></span><br><span class="line">sudo apt install zathura</span><br><span class="line"><span class="comment"># vim文本编辑器</span></span><br><span class="line">sudo apt install vim</span><br><span class="line"><span class="comment"># neovim文本编辑器</span></span><br><span class="line">sudo apt install neovim</span><br><span class="line"><span class="comment"># neofetch</span></span><br><span class="line">sudo apt install neofetch</span><br><span class="line"><span class="comment"># aria2</span></span><br><span class="line">sudo apt-get install aria2 -y</span><br><span class="line"><span class="comment"># uGet下载器</span></span><br><span class="line">sudo apt-get install uget -y</span><br></pre></td></tr></table></figure>
+
+<h2 id="UxPlay安装"><a href="#UxPlay安装" class="headerlink" title="UxPlay安装"></a>UxPlay安装</h2><h3 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h3><p>参考以下资料：<a target="_blank" rel="noopener" href="https://blog.csdn.net/sologala/article/details/112852708">CSDN教程</a>、<a target="_blank" rel="noopener" href="https://gstreamer.freedesktop.org/documentation/installing/on-linux.html?gi-language=c">GStreamer官网</a>、<a target="_blank" rel="noopener" href="https://github.com/antimof/UxPlay">UxPlay百科</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libgstreamer1.0-0 gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-libav gstreamer1.0-doc gstreamer1.0-tools gstreamer1.0-x gstreamer1.0-alsa gstreamer1.0-gl gstreamer1.0-gtk3 gstreamer1.0-qt5 gstreamer1.0-pulseaudio</span><br><span class="line">sudo apt-get install libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libgstreamer-plugins-bad1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-libav gstreamer1.0-doc gstreamer1.0-tools gstreamer1.0-x gstreamer1.0-alsa gstreamer1.0-gl gstreamer1.0-gtk3 gstreamer1.0-qt5 gstreamer1.0-pulseaudio</span><br><span class="line">sudo apt-get install libssl-dev libplist-dev libavahi-compat-libdnssd-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev gstreamer1.0-libav gstreamer1.0-plugins-bad</span><br><span class="line">sudo apt-get install gstreamer1.0-vaapi</span><br><span class="line">sudo apt-get install libx11-dev</span><br></pre></td></tr></table></figure>
+
+<h3 id="克隆仓库"><a href="#克隆仓库" class="headerlink" title="克隆仓库"></a>克隆仓库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/Downloads/</span><br><span class="line">git <span class="built_in">clone</span> https://github.com.cnpmjs.org/antimof/UxPlay.git</span><br></pre></td></tr></table></figure>
+
+<h3 id="编译项目"><a href="#编译项目" class="headerlink" title="编译项目"></a>编译项目</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/Downloads/UxPlay</span><br><span class="line">sudo cmake .</span><br><span class="line">sudo make</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置bash命令"><a href="#配置bash命令" class="headerlink" title="配置bash命令"></a>配置bash命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo vim ~/.bashrc</span><br><span class="line"><span class="built_in">alias</span> uxplay=<span class="string">&quot;/usr/local/bin/uxplay&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="运行程序"><a href="#运行程序" class="headerlink" title="运行程序"></a>运行程序</h3><p>确定PC和iPad在相同的WiFi环境下，在<code>bash</code>里面输入<code>uxplay</code>命令后，在iPad中进行连接</p>
+<h2 id="Scrcpy安装配置"><a href="#Scrcpy安装配置" class="headerlink" title="Scrcpy安装配置"></a>Scrcpy安装配置</h2><p>参考教程<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1721750">Ubuntu安装scrcpy完成手机投屏和控制</a><br>参考教程<a target="_blank" rel="noopener" href="https://www.cnblogs.com/hesse-summer/p/11200260.html">ubuntu使用scrcpy手机投屏</a></p>
+<h3 id="HarmonyOS手机开启开发者模式"><a href="#HarmonyOS手机开启开发者模式" class="headerlink" title="HarmonyOS手机开启开发者模式"></a>HarmonyOS手机开启开发者模式</h3><ol>
+<li>在<code>关于手机</code>中多次点击<code>版本号</code></li>
+<li>在<code>系统和更新</code>中点击<code>开发人员选项</code>，打开<code>USB调试</code></li>
+</ol>
+<h3 id="Scrcpy安装"><a href="#Scrcpy安装" class="headerlink" title="Scrcpy安装"></a>Scrcpy安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Srccpy</span></span><br><span class="line">sudo apt-get install scrcpy</span><br><span class="line"><span class="comment"># adb服务</span></span><br><span class="line">sudo apt-get install android-tools-adb</span><br><span class="line"><span class="comment"># 查看手机USB识别号</span></span><br><span class="line">lsusb</span><br><span class="line"><span class="comment"># 新建配置文件夹(如果没有)</span></span><br><span class="line">mkdir ~/.android</span><br><span class="line"><span class="comment"># 创建配置文件</span></span><br><span class="line"><span class="built_in">echo</span> 0x12d1 &gt; ~/.android/adb_usb.ini</span><br><span class="line">sudo touch /etc/udev/rules.d/android.rules</span><br><span class="line"><span class="comment"># 编辑配置文件</span></span><br><span class="line">sudo vim /etc/udev/rules.d/android.rules</span><br><span class="line">SUBSYSTEM==<span class="string">&quot;usb&quot;</span>, SYSFS&#123;idVendor&#125;==<span class="string">&quot;12d1&quot;</span>, MODE=<span class="string">&quot;0666&quot;</span></span><br><span class="line"><span class="comment"># 修改文件权限</span></span><br><span class="line">sudo chmod 777 /etc/udev/rules.d/android.rules</span><br></pre></td></tr></table></figure>
+
+<h3 id="启用adb服务"><a href="#启用adb服务" class="headerlink" title="启用adb服务"></a>启用adb服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">service udev restart</span><br><span class="line"><span class="comment"># 关闭adb旧服务</span></span><br><span class="line">adb kill-server</span><br><span class="line"><span class="comment"># 开启adb服务</span></span><br><span class="line">adb start-server</span><br><span class="line"><span class="comment"># 查看设备</span></span><br><span class="line">adb devices</span><br><span class="line"><span class="comment"># 开启scrcpy应用</span></span><br><span class="line">scrcpy</span><br></pre></td></tr></table></figure>
+
+<h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><ul>
+<li>开启adb服务后就会一直保持开启状态，包括重启后，除非手动关闭</li>
+<li>实际上，<code>12d1</code>是本人手机的<code>USB识别号</code>，请根据自己手机的号码自行更改对应数字</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/01/19/LaTeX/" rel="prev" title="LaTeX">
+                  <i class="fa fa-chevron-left"></i> LaTeX
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/01/23/C-CPP/" rel="next" title="C/C++">
+                  C/C++ <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Legolas Undomiel</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
