@@ -263,4 +263,142 @@ e1和df参数也被选为八个高斯点的共同参数，以便在每个元素�
 
 ## Experimental validations
 
+>The proposed model is used to simulate an experimental impact test on a 100 x 150 mm laminate plate manufactured with T700/M21 carbon/epoxy composite with UD reinforcement.
+>This plate, with stacking sequence [0, 45, 90, 45] is simply supported by a 75 x 125 mm window (AITM 00–10) and impacted at 25 J with a 16 mm diameter 2 kg impactor.
+>Only half of the plate is meshed due to symmetry considerations, the boundary conditions are imposed to represent the contact with a fixed rigid body and the impactor is assumed to be non-deformable.
+>The mechanical characteristics of this material and the material parameters used in this model are summarized in Table 1.
+
+所提出的模型被用来模拟一个100x150毫米的层压板的实验性冲击试验，该层压板是用T700/M21碳/环氧树脂复合材料制造的，带有UD加固。
+该板的堆叠顺序为[0, 45, 90, 45]，由一个75x125毫米的窗口（AITM 00-10）简单支撑，用一个直径为16毫米的2公斤的冲击器在25焦耳下进行冲击。
+由于对称性的考虑，只有一半的板块被网格化，边界条件被施加为代表与固定刚体的接触，冲击器被假定为不可变形的。
+该材料的机械特性和该模型中使用的材料参数总结在表1中。
+
+>In this table (Table 1), Et is the tension (compression) Young’s modulus in the fiber direction, Et is the Young’s modulus in transverse direction, mlt is the Poisson’s ratio, Glt is the shear modulus.
+>As mentioned above (Section 2.1), it can be observed that the 0t and kt are the only two parameters directly determined using the impact test: all other values come from conventional experimental tests presented in the literature [31,32,37,38,41].
+
+在这个表中（表1），Et是纤维方向的拉伸（压缩）杨氏模量，Et是横向的杨氏模量，mlt是泊松比，Glt是剪切模量。
+如上所述（第2.1节），可以看到0t和kt是唯一两个直接使用冲击试验确定的参数：**所有其他的值都来自于文献[31,32,37,38,41]中介绍的常规实验测试**。
+
+>The model is simulated using ABAQUS/Explicit v6.9 with user subroutine Vumat.
+>The total calculation time of this model is approximately 6 h with eight CPUs without optimization of the modeling to decrease this time.
+
+该模型使用ABAQUS/Explicit v6.9与用户子程序Vumat进行模拟。
+该模型的总计算时间约为6小时，有8个CPU，没有优化建模以减少这个时间。
+
+>The comparisons between experimental and numerical curves of impact force versus time and impactor displacement are illustrated in Fig. 9.
+>A good correlation is obtained between the experiment and model, demonstrating that the real impact damage is well accounted for in the numerical simulation.
+
+图9显示了冲击力与时间和冲击器位移的实验和数值曲线之间的比较。
+实验和模型之间获得了良好的相关性，表明真实的冲击损伤在数值模拟中得到了很好的考虑。
+
+>In Fig. 10, delaminated interfaces obtained by calculation are compared to the experimentally obtained results on the impacted and non-impacted sides.
+>The accurate correlation between experimental and numerical results tends to confirm the relevance of the model, and in particular the model of interaction between inter and intra-laminar damage.
+>As mentioned above (Section 2), the shape of the delaminations is closely linked to the interaction between matrix cracks and delamination.
+>In particular, the orientation of delamination with the fibers of the lower ply or the characteristic shape of the first interface of the non-impacted side is accurately simulated.
+>Moreover, this first delamination shape seems to be nearly separated into two parts, just as in the experimental results, although in the C-scan, the extensive matrix cracking of the first ply of the non-impacted side makes this observation difficult.
+>To confirm this result, which is coherent with the literature [1,9], a comparison was performed between the delamination and the C-scan examination performed on the non-impacted side of a 17-J impact (Fig. 11).
+>**This delamination shape can be explained by the creation of a central conical shape at the beginning of the impact test below the impactor, with high matrix cracking due to out-of-plane stresses (stz and slz).**
+>**The delamination tends to occur on the boundaries of this cone and is not created just below the impactor.**
+
+在图10中，通过计算得到的分层界面与实验得到的冲击面和非冲击面的结果进行了比较。
+实验和数值结果之间的准确相关性倾向于确认模型的相关性，特别是层间和层内损伤的相互作用模型。
+如上所述（第2节），分层的形状与基体裂缝和分层之间的相互作用密切相关。
+特别是，分层与下层纤维的方向或非冲击面的第一个界面的特征形状被准确地模拟出来。
+此外，这个第一层分层形状似乎几乎被分成两部分，就像在实验结果中一样，尽管在C-扫描中，非冲击侧第一层的广泛的基体裂纹使得这一观察变得困难。
+为了证实这个与文献[1,9]一致的结果，在17-J冲击的非冲击侧进行了分层和C-扫描检查的比较（图11）。
+**这种分层形状可以解释为在冲击试验开始时，在冲击器下方形成了一个中心圆锥形，由于平面外的应力（stz和slz）导致了高基体开裂。**
+**分层往往发生在这个圆锥体的边界上，而不是在冲击器的下方产生。**
+
+>This phenomenon can be highlighted by the illustration of the dimensionless energy release rates in mode I, GI/Gd I and II, GII/Gd II at the end of the impact for each delaminated interface (Fig. 12).
+>In this figure, blue1 (resp. red) color corresponds to dimensionless energy release rate equals 0 (resp. 1) and the orange line to the mark of the delaminated area.
+>It can be observed in this figure that mode II generally predominates compared to mode I, except in a central zone around the impactor point.
+>This zone can be assimilated to a conical central zone with its axis in the impact direction and with its higher diameter on the non-impacted side.
+>**It can be concluded that at the beginning of the impact test, the direct contact of the impactor with the laminate induces a conical shape with high matrix cracking due to out-of-plane stresses (stz and slz)**.
+>**These matrix cracks tend to isolate a central cone which induces the beginning of delamination with a high rate of mode I (Fig. 13a)**.
+>**This scenario is coherent with the literature [1,9], which indicates a precursor role regarding the development of delamination and which assumes that the delamination initiation is principally related to mode I characteristics**.
+
+这一现象可以通过对每个分层界面在冲击结束时的模式I、GI/Gd I和II、GII/Gd II的无尺寸能量释放率的说明来强调（图12）。
+在该图中，蓝色1（或红色）对应于无量纲能量释放率等于0（或1），橙色线对应于分层区域的标记。
+从该图中可以看出，与模式I相比，模式II通常占主导地位，除了在冲击点周围的中心区域。
+这个区域可以被理解为一个圆锥形的中心区域，其轴线在冲击方向，其直径在非冲击侧较高。
+**可以得出结论，在冲击试验开始时，由于平面外应力（stz和slz）的作用，冲击器与层压板的直接接触诱发了锥形的基体裂纹。**
+**这些基体裂纹倾向于隔离一个中心锥体，诱发了模式I的高比率分层的开始（图13a）。**
+**这种情况与文献[1,9]是一致的，它表明了关于分层发展的先导作用，并假设分层的开始主要与模式I的特性有关。**
+
+>**After this phase of delamination initiation, propagation of delamination is principally defined by mode II (Fig. 13b).**
+>**This shearing fracture mode is due to high stresses in the lower ply of the interface in the fiber direction (rl), inducing high shear stresses in interfaces (slz and stz), and explains the propagation direction of the delamination in the fiber direction of the lower ply.**
+
+**在这个分层开始的阶段之后，分层的传播主要是由模式II定义的（图13b）。**
+**这种剪切断裂模式是由于界面下层在纤维方向（rl）的高应力，引起界面（slz和stz）的高剪切应力，并解释了分层在下层纤维方向的传播方向。**
+
+>In Fig. 14, the deformed shape of the plate, obtained numerically, is represented in two cut planes 0 and 90, at maximum displacement (Fig. 14a) and after a 25-J impact (Fig. 14b).
+>Some major damage is clearly visible in this figure: for example, the first ply, non-impacted side, is clearly broken in the transverse direction, which is visible in the 90 cut.
+>It can also be observed that, for an impact of 25 J, this ply is not broken in the fiber direction.
+>This transverse crack corresponds to the conventional crack observed after impact on the non-impacted side [27].
+>Delamination is also observable, in the very large opening of the first interface, nonimpacted side, on the 0 cut.
+>The significant delamination of this interface is conventionally observed using C-Scan (Fig. 10a).
+>The central zone below the impactor is also severely damaged, as in the experiment (Fig. 2a).
+>The overall simulated shape of permanent deformation (Fig. 10b) correlates well with experimental photographs (Fig. 2a) and in particular the permanent opening of the non-impacted side’s first delamination is obtained, although the simulated opening is larger than the experimental one.
+>This difference can be partially due to the experimental procedure of cutting and polishing which induces partial disappearance of the permanent indentation, but also to the model of matrix crack blocking which is in an early stage and should be confirmed in other cases.
+>A study is currently underway to determine the importance of debris blocking of the 45 cracks on the permanent indentation.
+
+在图14中，通过数值得到的板的变形形状在两个切割平面0和90上表示，在最大位移时（图14a）和25-J冲击后（图14b）。
+在这个图中可以清楚地看到一些主要的损伤：例如，第一层，非冲击的一面，在横向上明显断裂，这在90切面上可以看到。
+还可以观察到，对于25J的冲击，这层板在纤维方向上没有断裂。
+这种横向裂纹与在非冲击侧的冲击后观察到的传统裂纹相一致[27]。
+分层也是可以观察到的，在第一个接口的非常大的开口中，非冲击侧，在0切口上。
+这个界面的显著分层可以用C-扫描来观察（图10a）。
+冲击器下面的中央区域也被严重损坏，就像实验中一样（图2a）。
+永久性变形的整体模拟形状（图10b）与实验照片（图2a）有很好的相关性，特别是得到了非冲击面的第一个分层的永久性开口，尽管模拟的开口比实验的大。
+这种差异可能部分是由于切割和抛光的实验过程导致永久压痕的部分消失，但也可能是由于基体裂纹阻断的模型处于早期阶段，应该在其他情况下确认。
+目前正在进行一项研究，以确定45条裂纹的碎片阻塞对永久压痕的重要性。
+
+>Then, the deformed shape of the plate resulting from the 25-J impact is plotted on the impacted and non-impacted sides (Fig. 15).
+>The experimental results are obtained with Vic-3D image correlations and the numerical results are obtained from the finite element calculations.
+>The permanent indentation is clearly visible on the impacted side, but is difficult to define because the plate is twisted.
+>We choose to define it according to the distance between the lowest line of the twisted plate and the lowest point of the plate, i.e. at the impact point (Fig. 15a).
+>In this case, a value of about 0.5 mm is obtained.
+>The plate shape after impact is accurately simulated by the numerical model, and in particular, the general twisted shape of the plate is reproduced. The orientation of the twisted shape, in the diagonal the nearest to the 45 ply, is due to the [0, 45, 90, 45] draping sequence which induces a higher bending stiffness in this direction.
+>In practical terms, the bending stiffness D11 is about 3.6  105 N. mm in the 45 direction, compared to 1.8  105 N. mm in the 45 direction.
+
+然后，由25-J冲击产生的板的变形形状被绘制在冲击和非冲击的两侧（图15）。
+实验结果是通过Vic-3D图像关联得到的，数值结果是通过有限元计算得到的。
+永久压痕在受冲击的一侧清晰可见，但由于板块是扭曲的，所以很难定义。
+我们选择根据扭曲的板的最低线和板的最低点之间的距离来定义它，也就是在冲击点（图15a）。
+在这种情况下，得到一个大约0.5毫米的数值。
+数值模型准确地模拟了撞击后的板形，特别是再现了板的一般扭曲形状。扭曲形状的方向，在最接近45层的对角线上，是由于[0, 45, 90, 45]的垂线序列，在这个方向上引起了更高的弯曲刚度。
+从实际情况来看，在45方向的弯曲刚度D11约为3.6 105 N. mm，而45方向的弯曲刚度为1.8 105 N. mm。
+
+>This twisted shape is also visible on the non-impacted side, in both the experimental and numerical results.
+>Moreover, the deformation of the impact point is larger than on the impacted side.
+>For example, in the Z direction, the permanent indentation is about 1 mm compared to 0.5 mm on the impacted side.
+>On the nonimpacted side, the terms of the impact point and the permanent indentation have been exaggerated to simplify the discussion.
+>This higher indentation on the non-impacted side is due to the increased plate thickness in the impacted zone.
+>This phenomenon is also visible in the micrographic cuts (Fig. 2), although it is lower, probably due to the cutting and polishing processes.
+>It is generally simulated by the model, although amplified.
+>Indeed, the black zone (Fig. 15b) represents Z-displacements above 0.94 mm, the highest experimental value, and the gray zone represents Z-displacements below 0.29 mm, the lowest experimental value obtained.
+>Moreover, the experimental and numerical scales are set to a constant and were correlated to half scale (green color).
+>Moreover, it can be observed on the numerically obtained, non-impacted side of the deformed shape, openings exist between consecutive fiber strips (white colored zone).
+>These opening are artificial and due to the large deformation scale factor.
+
+在实验和数值结果中，这种扭曲的形状在未受冲击的一侧也是可见的。
+此外，冲击点的变形要比被冲击的一侧大。
+例如，在Z方向上，永久压痕约为1毫米，而在受冲击的一侧为0.5毫米。
+在未受冲击的一侧，为了简化讨论，冲击点和永久压痕的术语被夸大了。
+非冲击侧的这种较高的压痕是由于冲击区的板厚增加造成的。
+这种现象在显微切割中也可以看到（图2），尽管它比较低，可能是由于切割和抛光过程。
+它通常被模型模拟，尽管被放大了。
+事实上，黑色区域（图15b）代表Z-位移超过0.94毫米，是最高的实验值，而灰色区域代表Z-位移低于0.29毫米，是最低的实验值。
+此外，实验和数值标度被设定为常数，并与半标度（绿色）相关联。
+此外，可以观察到在数值得到的变形形状的非冲击侧，连续的纤维条之间存在开口（白色区域）。
+这些开口是人为的，是由于大的变形比例因子造成的。
+
+>The deformed zone is also larger in the 0 plane of the nonimpacted side, compared to the impacted side.
+>This phenomenon is also generally simulated by modeling even if it is amplified.
+>Consequently, the relatively good correlation of the simulations with experimental results on the deformed shape obtained after impact shows the accuracy of the permanent indentation modeling.
+
+在非冲击侧的0平面上，变形区也比冲击侧大。
+这种现象即使被放大，一般也是通过建模来模拟的。
+因此，在冲击后获得的变形形状上，模拟与实验结果有相对较好的相关性，这表明永久压痕建模的准确性。
+
 ## Conclusion
