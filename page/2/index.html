@@ -116,7 +116,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -147,6 +147,103 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/07/Reference/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Legolas Undomiel">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/09/07/Reference/" class="post-title-link" itemprop="url">Reference</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-09-07 09:10:17" itemprop="dateCreated datePublished" datetime="2021-09-07T09:10:17+08:00">2021-09-07</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2022-03-25 20:26:28" itemprop="dateModified" datetime="2022-03-25T20:26:28+08:00">2022-03-25</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><ul>
+<li><strong>引用的本质：</strong> 给变量起别名</li>
+<li>语法： <code>数据类型 &amp; 别名 = 原名</code></li>
+<li>引用必须初始化</li>
+<li><strong>引用初始化后不可改变</strong>，不能再变成其他变量的别名</li>
+</ul>
+<h1 id="引用做函数形参"><a href="#引用做函数形参" class="headerlink" title="引用做函数形参"></a>引用做函数形参</h1><p><strong>函数参数传递方式：</strong></p>
+<ul>
+<li>值传递</li>
+<li>地址传递(指针)</li>
+<li>引用传递</li>
+</ul>
+<h1 id="引用做函数返回值"><a href="#引用做函数返回值" class="headerlink" title="引用做函数返回值"></a>引用做函数返回值</h1><p><strong>注意：</strong></p>
+<ul>
+<li>不要返回局部变量的引用</li>
+<li>函数的调用可以作为左值</li>
+</ul>
+<h1 id="引用的本质"><a href="#引用的本质" class="headerlink" title="引用的本质"></a>引用的本质</h1><ul>
+<li>引用实际上是再C++内部实现一个指针变量</li>
+<li>指针的操作由编译器帮助实现</li>
+</ul>
+<h2 id="引用-vs-指针"><a href="#引用-vs-指针" class="headerlink" title="引用 vs. 指针"></a>引用 vs. 指针</h2><ul>
+<li>不存在空引用。引用必须连接到一块合法的内存。</li>
+<li>一旦引用被初始化为一个对象，就不能被指向到另一个对象。指针可以在任何时候指向到另一个对象。</li>
+<li>引用必须在创建时被初始化。指针可以在任何时间被初始化。</li>
+</ul>
+<h1 id="常引用"><a href="#常引用" class="headerlink" title="常引用"></a>常引用</h1><p>用 <code>const</code> 关键字修饰引用，防止形参改变实参</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 交换函数</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 值传递</span></span><br><span class="line"><span class="comment">// void swap(int a, int b)</span></span><br><span class="line"><span class="comment">// &#123;</span></span><br><span class="line"><span class="comment">//     int temp = a;</span></span><br><span class="line"><span class="comment">//     a = b;</span></span><br><span class="line"><span class="comment">//     b = temp;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 地址传递</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span> * a, <span class="keyword">int</span> * b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> temp = *a;</span><br><span class="line">    *a = *b;</span><br><span class="line">    *b = temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 引用</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span> &amp;a, <span class="keyword">int</span> &amp;b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> temp = a;</span><br><span class="line">    a = b;</span><br><span class="line">    b = temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 引用做函数返回值</span></span><br><span class="line"><span class="function"><span class="keyword">int</span>&amp; <span class="title">test</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// int a = 10;// 栈区，函数结束自动释放</span></span><br><span class="line">    <span class="comment">// return a;// INVALID</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> b = <span class="number">10</span>;<span class="comment">// 全局区</span></span><br><span class="line">    <span class="keyword">return</span> b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 常引用</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">showValue</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> &amp;a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// a = 10000;// INVALID</span></span><br><span class="line">    cout &lt;&lt; a &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">int</span> &amp;b = a;<span class="comment">// 自动转换为 int * const b = &amp;a;</span></span><br><span class="line">    b = <span class="number">20</span>;<span class="comment">// 自动转换为 *b = 20;</span></span><br><span class="line">    cout &lt;&lt; a &lt;&lt; <span class="string">&#x27;\t&#x27;</span> &lt;&lt; b &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">int</span> c = <span class="number">50</span>;</span><br><span class="line">    <span class="built_in">swap</span>(a, c);</span><br><span class="line">    <span class="built_in">swap</span>(&amp;a, &amp;c);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> &amp;ref = <span class="built_in">test</span>();</span><br><span class="line">    cout &lt;&lt; ref &lt;&lt; endl;</span><br><span class="line">    <span class="comment">// 左值</span></span><br><span class="line">    <span class="built_in">test</span>() = <span class="number">1000</span>;<span class="comment">// a = 1000</span></span><br><span class="line">    cout &lt;&lt; ref &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> anu = <span class="number">100</span>;</span><br><span class="line">    <span class="built_in">showValue</span>(anu);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
